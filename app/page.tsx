@@ -25,7 +25,6 @@ const services = [
   { icon: Plane,             slug: 'viagem',       title: 'Seguro Viagem',       desc: 'Assistência médica hospitalar 24h em viagens nacionais e internacionais, extravio de bagagem e repatriação.', featured: false },
 ]
 
-const partnerInsurers = [9, 10, 11, 12, 13, 14, 15, 16]
 
 const blogPosts = [
   { slug: 'seguro-auto-guia-completo',   thumb: '/blog-auto.jpg',    category: 'Auto',        date: '28 de Agosto de 2026', title: 'Guia definitivo: como escolher o seguro auto ideal sem pagar a mais por isso',         excerpt: 'Franquia normal ou reduzida? Cobertura compreensiva ou apenas terceiros? Entenda cada detalhe antes de contratar.' },

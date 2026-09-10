@@ -118,6 +118,7 @@ export default function BlogPage() {
           fill
           className="hero-bg"
           priority
+          sizes="100vw"
         />
         <div className="hero-gradient" aria-hidden="true" />
         <div className="hero-gradient-bottom" aria-hidden="true" />

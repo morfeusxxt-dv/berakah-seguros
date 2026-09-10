@@ -4,20 +4,22 @@ import Image from 'next/image'
 import { INSURERS } from '@/lib/insurers'
 
 export function PartnersMarquee() {
-  // Use all featured partners, repeated twice for infinite continuous seamless loop
-  const marqueeItems = [...INSURERS, ...INSURERS]
+  // Top featured insurers for the header trust bar
+  const featured = INSURERS.filter((i) => i.featured).slice(0, 16)
 
   return (
-    <div className="partners-marquee-container" aria-label="Carrossel de seguradoras parceiras">
-      <div className="partners-marquee-track">
-        {marqueeItems.map((ins, index) => (
-          <div key={`${ins.id}-${index}`} className="partners-marquee-item" title={ins.name}>
+    <div className="marquee-wrapper" aria-label="Seguradoras conveniadas">
+      <div className="marquee-group">
+        {featured.map((ins, index) => (
+          <div key={`track1-${ins.id}-${index}`} className="marquee-logo-card" title={ins.name}>
             <Image
               src={ins.logo}
               alt={ins.name}
-              width={110}
-              height={32}
-              className="partners-marquee-img"
+              width={95}
+              height={26}
+              className="marquee-logo-img"
+              unoptimized
+              priority
               onError={(e) => {
                 const target = e.currentTarget
                 if (!target.src.endsWith(ins.png)) {
@@ -25,7 +27,28 @@ export function PartnersMarquee() {
                 }
               }}
             />
-            <span className="partners-marquee-label">{ins.name}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="marquee-group" aria-hidden="true">
+        {featured.map((ins, index) => (
+          <div key={`track2-${ins.id}-${index}`} className="marquee-logo-card" title={ins.name}>
+            <Image
+              src={ins.logo}
+              alt={ins.name}
+              width={95}
+              height={26}
+              className="marquee-logo-img"
+              unoptimized
+              priority
+              onError={(e) => {
+                const target = e.currentTarget
+                if (!target.src.endsWith(ins.png)) {
+                  target.src = ins.png
+                }
+              }}
+            />
           </div>
         ))}
       </div>

@@ -24,10 +24,14 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
       { url: '/icon-dark-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/logos/logo_06.png', type: 'image/png' },
+      { url: '/logos/logo_06.png', sizes: '192x192', type: 'image/png' },
     ],
-    apple: '/apple-icon.png',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
 }
 

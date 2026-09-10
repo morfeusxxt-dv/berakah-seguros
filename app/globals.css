@@ -304,12 +304,14 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   position: fixed;
   bottom: 32px;
   right: 32px;
-  z-index: 90;
+  z-index: 999;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  pointer-events: none;
 }
 .whatsapp-btn {
+  pointer-events: auto;
   position: relative;
   width: 60px;
   height: 60px;
@@ -318,40 +320,68 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  color: #ffffff;
+  box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
   flex-shrink: 0;
+  text-decoration: none;
+  z-index: 2;
 }
-.whatsapp-btn:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37, 211, 102, 0.5); }
-.whatsapp-btn svg { width: 28px; height: 28px; }
+.whatsapp-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+}
+.whatsapp-btn svg {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  z-index: 3;
+}
 .whatsapp-pulse {
   position: absolute;
-  inset: 0;
+  inset: -4px;
   border-radius: 50%;
-  background: #25D366;
-  animation: pulse-ring 2.5s ease-out infinite;
+  border: 2px solid #25D366;
+  opacity: 0;
+  pointer-events: none !important;
+  z-index: -1;
+  animation: wa-ripple 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
 }
-@keyframes pulse-ring {
-  0%   { transform: scale(1);   opacity: 0.6; }
-  70%  { transform: scale(1.5); opacity: 0; }
-  100% { transform: scale(1.5); opacity: 0; }
+@keyframes wa-ripple {
+  0% {
+    transform: scale(0.92);
+    opacity: 0.85;
+  }
+  65% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
 }
 .whatsapp-tooltip {
-  background: var(--black);
-  color: var(--white);
+  pointer-events: auto;
+  background: #111827;
+  color: #ffffff;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 700;
+  font-family: var(--ff-heading);
   padding: 8px 16px;
-  border-radius: 40px;
+  border-radius: 999px;
   white-space: nowrap;
   opacity: 0;
   transform: translateX(8px);
-  transition: opacity 0.2s, transform 0.2s;
-  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
   order: -1;
 }
-.whatsapp-fab:hover .whatsapp-tooltip { opacity: 1; transform: translateX(0); }
+.whatsapp-btn:hover ~ .whatsapp-tooltip,
+.whatsapp-fab:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* ─── BUTTONS ─────────────────────────────── */
 .btn {
@@ -755,23 +785,29 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   filter: none;
 }
 
-/* ─── PARTNERS MARQUEE TRACK ─────────────── */
-.partners-marquee-container {
+/* ─── PARTNERS MARQUEE (DUAL TRACK SEAMLESS) ─── */
+.marquee-wrapper {
+  display: flex;
   overflow: hidden;
-  position: relative;
+  user-select: none;
+  gap: 20px;
   width: 100%;
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 6%, black 94%, transparent);
   padding: 4px 0;
 }
-.partners-marquee-track {
+.marquee-group {
+  flex-shrink: 0;
   display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: scrollMarquee 75s linear infinite;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  min-width: 100%;
+  animation: scrollMarquee 38s linear infinite;
   will-change: transform;
 }
-.partners-marquee-track:hover {
+.marquee-wrapper:hover .marquee-group {
   animation-play-state: paused;
 }
 @keyframes scrollMarquee {
@@ -779,48 +815,33 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(calc(-100% - 20px));
   }
 }
-.partners-marquee-item {
+.marquee-logo-card {
   display: inline-flex;
   align-items: center;
-  gap: 12px;
-  padding: 6px 18px 6px 14px;
-  background: var(--surface);
+  justify-content: center;
+  height: 42px;
+  padding: 6px 18px;
+  background: #ffffff;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.03);
-  transition: all 0.25s ease;
-  cursor: default;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   flex-shrink: 0;
 }
-.partners-marquee-item:hover {
-  background: #ffffff;
-  border-color: var(--yellow);
+.marquee-logo-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  border-color: var(--yellow);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
 }
-.partners-marquee-img {
+.marquee-logo-img {
   height: 24px;
   width: auto;
-  max-width: 90px;
+  max-width: 95px;
   object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.75;
-  transition: all 0.25s ease;
-}
-.partners-marquee-item:hover .partners-marquee-img {
-  filter: none;
-  opacity: 1;
-}
-.partners-marquee-label {
-  font-family: var(--ff-heading);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  color: var(--text);
-  white-space: nowrap;
+  transition: transform 0.2s ease;
 }
 
 /* ─── PARTNERS SHOWCASE SECTION ──────────── */
