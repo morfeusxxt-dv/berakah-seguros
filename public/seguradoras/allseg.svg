@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" width="240" height="90">
+  <!-- Navy circle with red star swoosh -->
+  <circle cx="45" cy="45" r="26" fill="#1e1b4b"/>
+  <polygon points="45,28 49,39 61,39 51,46 55,58 45,51 35,58 39,46 29,39 41,39" fill="#ef4444"/>
+  <text x="82" y="44" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#1e1b4b">allseg</text>
+  <text x="82" y="62" font-family="'Montserrat', sans-serif" font-weight="700" font-size="12" fill="#64748b" letter-spacing="1">seguradora</text>
+</svg>

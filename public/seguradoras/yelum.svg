@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" width="240" height="100">
+  <rect x="10" y="10" width="220" height="80" rx="12" fill="#1e1e1e"/>
+  <text x="120" y="58" text-anchor="middle" font-family="'Inter', 'Arial Black', sans-serif" font-weight="900" font-size="38" fill="#ffd100">Yelum</text>
+  <text x="120" y="76" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="600" font-size="12" fill="#ffd100" letter-spacing="1">seguradora</text>
+</svg>

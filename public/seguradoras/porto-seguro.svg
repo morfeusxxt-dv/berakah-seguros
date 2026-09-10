@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" width="240" height="180">
+  <defs>
+    <linearGradient id="portoBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#008ce6"/>
+      <stop offset="100%" stop-color="#006eb3"/>
+    </linearGradient>
+  </defs>
+  <!-- Porto Sail Square -->
+  <rect x="75" y="15" width="90" height="85" rx="10" fill="url(#portoBlue)"/>
+  <!-- Sail Curves -->
+  <path d="M 88 30 Q 115 32 152 48 Q 125 45 92 41 Z" fill="#ffffff"/>
+  <path d="M 91 46 Q 120 48 153 62 Q 127 59 95 55 Z" fill="#ffffff"/>
+  <path d="M 95 60 Q 125 62 152 74 Q 128 72 98 67 Z" fill="#ffffff"/>
+  <path d="M 101 72 Q 125 74 148 83 Q 128 82 103 78 Z" fill="#ffffff"/>
+  <!-- Text: PORTO SEGURO -->
+  <text x="120" y="132" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#111827" letter-spacing="0.5">PORTO</text>
+  <text x="120" y="164" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="28" fill="#111827" letter-spacing="0.5">SEGURO</text>
+</svg>

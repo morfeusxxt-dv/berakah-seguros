@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" width="200" height="100">
+  <!-- Heart swirl -->
+  <path d="M 100 20 C 130 5, 160 30, 140 65 C 120 90, 100 95, 100 95 C 100 95, 80 90, 60 65 C 40 30, 70 5, 100 20 Z" fill="none" stroke="#7cb518" stroke-width="8" stroke-linecap="round"/>
+  <text x="100" y="52" text-anchor="middle" font-family="'Arial Black', sans-serif" font-weight="900" font-size="20" fill="#003366" letter-spacing="1">VITAL</text>
+  <text x="100" y="72" text-anchor="middle" font-family="'Arial Black', sans-serif" font-weight="900" font-size="18" fill="#003366" letter-spacing="1">CARD</text>
+</svg>

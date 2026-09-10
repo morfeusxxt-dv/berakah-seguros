@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, Shield, Award, CheckCircle2, Building2, Users } from 'lucide-react'
+import { PartnersShowcase } from '@/components/PartnersShowcase'
 
 export const metadata: Metadata = {
   title: 'Sobre Nós | Berakah Seguros — Grupo Baruch',
@@ -53,7 +54,7 @@ export default function SobrePage() {
               Construída com foco real <span style={{ color: '#D99500' }}>nas pessoas.</span>
             </h2>
             <p style={{ fontSize: '15px', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '18px' }}>
-              À frente da Berakah Seguros está <strong style={{ color: 'var(--text)' }}>Rafaella</strong>, fundadora e diretora da corretora. A empresa nasceu da convicção de que o mercado de seguros precisava de uma abordagem mais próxima, humana e transparente, onde o segurado não é tratado como apenas um número de apólice.
+              À frente da Berakah Seguros está <strong style={{ color: 'var(--text)' }}>Rafaella Pinheiro</strong>, fundadora e diretora da corretora. A empresa nasceu da convicção de que o mercado de seguros precisava de uma abordagem mais próxima, humana e transparente, onde o segurado não é tratado como apenas um número de apólice.
             </p>
             <p style={{ fontSize: '15px', color: 'var(--muted)', lineHeight: 1.75, marginBottom: '18px' }}>
               Integrada ao ecossistema do <strong style={{ color: 'var(--text)' }}>Grupo Baruch</strong> — holding empresarial com solidez comercial, governança e tradição em soluções financeiras —, a Berakah une o poder de negociação junto às maiores seguradoras do país à dedicação exclusiva de quem cuida de cada cliente de forma personalizada.
@@ -68,8 +69,8 @@ export default function SobrePage() {
 
           <div className="mission-visual" style={{ position: 'relative' }}>
             <Image
-              src="/rafaella.png"
-              alt="Rafaella — Fundadora e Diretora da Berakah Seguros"
+              src="/imagemrafaella.jpeg"
+              alt="Rafaella Pinheiro — Fundadora e Diretora da Berakah Seguros"
               width={600}
               height={450}
               style={{ width: '100%', height: 'auto', borderRadius: '16px', objectFit: 'cover', aspectRatio: '4/3', border: '1px solid var(--border)', boxShadow: 'var(--shadow-md)' }}
@@ -93,8 +94,8 @@ export default function SobrePage() {
                 <Shield size={22} color="#111111" strokeWidth={2.5} />
               </div>
               <div>
-                <div style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--ff-heading)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text)' }}>Rafaella</div>
-                <div style={{ fontSize: '12px', color: '#D99500', fontWeight: 700 }}>Fundadora & Diretora da Berakah Seguros</div>
+                <div style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--ff-heading)', letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--text)' }}>Rafaella Pinheiro</div>
+                <div style={{ fontSize: '12px', color: '#D99500', fontWeight: 700 }}>Fundadora &amp; Diretora da Berakah Seguros</div>
               </div>
             </div>
           </div>
@@ -157,24 +158,10 @@ export default function SobrePage() {
       </section>
 
       {/* ── SEGURADORAS PARCEIRAS ──────────── */}
-      <section className="insurers-strip" aria-labelledby="insurers-heading" style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '56px var(--section-px)' }}>
-        <h3 id="insurers-heading" style={{ fontFamily: 'var(--ff-heading)', color: 'var(--muted)', fontSize: '13px', letterSpacing: '0.08em', textTransform: 'uppercase', textAlign: 'center', marginBottom: '28px' }}>
-          Trabalhamos em parceria com as maiores seguradoras do mercado brasileiro
-        </h3>
-        <div className="insurers-logos" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '32px', flexWrap: 'wrap' }}>
-          {[9, 10, 11, 12, 13, 14, 15, 16, 17, 18].map((n) => (
-            <Image
-              key={n}
-              src={`/logos/logo_${String(n).padStart(2, '0')}.png`}
-              alt={`Seguradora parceira ${n}`}
-              width={105}
-              height={34}
-              className="insurer-logo"
-              style={{ filter: 'grayscale(100%)', opacity: 0.8 }}
-            />
-          ))}
-        </div>
-      </section>
+      <PartnersShowcase
+        title="Parceiros Estratégicos & Seguradoras Conveniadas"
+        subtitle="Nossa independência nos permite cotar e emitir apólices nas companhias mais sólidas do Brasil e do mundo, garantindo a proteção ideal pelo melhor custo."
+      />
 
       {/* ── FINAL CTA ──────────────────────── */}
       <section className="final-cta" aria-labelledby="sobre-final-cta-heading">

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" width="240" height="90">
+  <!-- Dot matrix sphere icon -->
+  <g fill="#009fe3">
+    <circle cx="35" cy="28" r="3.5"/> <circle cx="45" cy="28" r="3.5"/> <circle cx="55" cy="28" r="3.5"/>
+    <circle cx="28" cy="38" r="3.5"/> <circle cx="38" cy="38" r="4.5"/> <circle cx="48" cy="38" r="4.5"/> <circle cx="58" cy="38" r="3.5"/>
+    <circle cx="25" cy="48" r="3.5"/> <circle cx="35" cy="48" r="4.5"/> <circle cx="45" cy="48" r="4.5"/> <circle cx="55" cy="48" r="3.5"/>
+    <circle cx="28" cy="58" r="3.5"/> <circle cx="38" cy="58" r="4.5"/> <circle cx="48" cy="58" r="4.5"/> <circle cx="58" cy="58" r="3.5"/>
+    <circle cx="35" cy="68" r="3.5"/> <circle cx="45" cy="68" r="3.5"/> <circle cx="55" cy="68" r="3.5"/>
+  </g>
+  <text x="75" y="56" font-family="'Inter', sans-serif" font-weight="900" font-size="38" fill="#003366" letter-spacing="-0.5">ituran</text>
+  <text x="75" y="74" font-family="'Inter', sans-serif" font-weight="700" font-size="8.5" fill="#64748b" letter-spacing="1">TECNOLOGIA PILOTADA POR PESSOAS</text>
+</svg>

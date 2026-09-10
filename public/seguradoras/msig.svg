@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" width="240" height="90">
+  <!-- Mitsui red/blue lozenges -->
+  <g transform="translate(110, 8)">
+    <polygon points="10,0 20,12 10,24 0,12" fill="#cc0000"/>
+    <polygon points="16,6 26,18 16,30 6,18" fill="#002244" opacity="0.9"/>
+  </g>
+  <text x="120" y="54" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="16" fill="#002244">MSIG</text>
+  <text x="120" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="700" font-size="11" fill="#1e293b">Mitsui Sumitomo Seguros</text>
+</svg>

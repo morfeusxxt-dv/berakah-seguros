@@ -1,17 +1,20 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { PhoneCall, X, ShieldAlert, CheckCircle, ExternalLink } from 'lucide-react'
 
 const seguradorasTelefones = [
-  { nome: 'Porto Seguro / Azul / Itaú', fone: '0800 727 0800', desc: 'Guincho, colisão, chaveiro e residencial' },
-  { nome: 'Bradesco Seguros',           fone: '0800 701 2757', desc: 'Assistência 24h auto, vida e saúde' },
-  { nome: 'Allianz Seguros',            fone: '0800 130 700',  desc: 'Sinistros, socorro mecânico e vidros' },
-  { nome: 'Tokio Marine',               fone: '0800 318 6546', desc: 'Auto, residencial e empresarial' },
-  { nome: 'SulAmérica',                 fone: '0800 721 0126', desc: 'Assistência 24h e sinistros' },
-  { nome: 'Mapfre Seguros',             fone: '0800 775 4545', desc: 'Apoio emergencial e guincho' },
-  { nome: 'HDI Seguros',                fone: '0800 701 5430', desc: 'Avisos de sinistro e guincho rápido' },
-  { nome: 'Sompo Seguros',              fone: '0800 77 19 119',desc: 'Atendimento a ocorrências patrimoniais' },
+  { nome: 'Porto Seguro',       fone: '0800 727 0800', desc: 'Guincho, colisão, chaveiro e residencial', logo: '/seguradoras/porto-seguro.svg' },
+  { nome: 'Bradesco Seguros',   fone: '0800 701 2757', desc: 'Assistência 24h auto, vida e saúde',         logo: '/seguradoras/bradesco-seguros.svg' },
+  { nome: 'Allianz Seguros',    fone: '0800 130 700',  desc: 'Sinistros, socorro mecânico e vidros',      logo: '/seguradoras/allianz.svg' },
+  { nome: 'Tokio Marine',       fone: '0800 318 6546', desc: 'Auto, residencial e empresarial',           logo: '/seguradoras/tokio-marine.svg' },
+  { nome: 'SulAmérica',         fone: '0800 721 0126', desc: 'Assistência 24h e sinistros',               logo: '/seguradoras/sulamerica.svg' },
+  { nome: 'Mapfre Seguros',     fone: '0800 775 4545', desc: 'Apoio emergencial e guincho',               logo: '/seguradoras/mapfre.svg' },
+  { nome: 'HDI Seguros',        fone: '0800 701 5430', desc: 'Avisos de sinistro e guincho rápido',       logo: '/seguradoras/hdi.svg' },
+  { nome: 'Zurich Seguros',     fone: '0800 284 4848', desc: 'Sinistro e emergência 24h',                 logo: '/seguradoras/zurich.svg' },
+  { nome: 'Suhai Seguros',      fone: '0800 327 8424', desc: 'Furto, roubo e assistência 24h',            logo: '/seguradoras/suhai.svg' },
+  { nome: 'Sompo / Marítima',   fone: '0800 77 19 119',desc: 'Atendimento a ocorrências patrimoniais',    logo: '/seguradoras/maritima.svg' },
 ]
 
 export function EmergencyModal() {
@@ -140,26 +143,38 @@ export function EmergencyModal() {
 
             {/* Grid de Seguradoras */}
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '24px' }}>
-              {seguradorasTelefones.map(({ nome, fone, desc }) => (
+              {seguradorasTelefones.map(({ nome, fone, desc, logo }) => (
                 <div
                   key={nome}
                   style={{
                     padding: '14px 16px',
-                    borderRadius: '10px',
+                    borderRadius: '12px',
                     border: '1px solid var(--border)',
                     background: 'var(--white)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
+                    gap: '8px',
                   }}
                 >
-                  <div>
-                    <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--ff-heading)' }}>
-                      {nome}
-                    </h4>
-                    <p style={{ fontSize: '11px', color: 'var(--muted)', marginTop: '2px' }}>
-                      {desc}
-                    </p>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '48px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f8fafc', borderRadius: '8px', padding: '4px', flexShrink: 0 }}>
+                      <Image
+                        src={logo}
+                        alt={nome}
+                        width={44}
+                        height={28}
+                        style={{ objectFit: 'contain', maxHeight: '28px' }}
+                      />
+                    </div>
+                    <div>
+                      <h4 style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text)', fontFamily: 'var(--ff-heading)' }}>
+                        {nome}
+                      </h4>
+                      <p style={{ fontSize: '11px', color: 'var(--muted)', marginTop: '2px', lineHeight: 1.4 }}>
+                        {desc}
+                      </p>
+                    </div>
                   </div>
                   <a
                     href={`tel:${fone.replace(/\s+/g, '')}`}

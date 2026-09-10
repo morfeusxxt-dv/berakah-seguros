@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 100" width="220" height="100">
+  <rect x="10" y="10" width="200" height="80" rx="14" fill="#582d91"/>
+  <!-- Small heart icon -->
+  <path d="M 110 24 Q 106 18 102 21 Q 98 25 106 31 L 110 35 L 114 31 Q 122 25 118 21 Q 114 18 110 24 Z" fill="#ffd100" opacity="0.85"/>
+  <text x="110" y="70" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="36" fill="#ffd100" letter-spacing="1">youse</text>
+</svg>

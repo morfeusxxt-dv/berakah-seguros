@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 90" width="260" height="90">
+  <!-- Bradesco Tree icon in red rounded square -->
+  <rect x="15" y="20" width="46" height="46" rx="8" fill="#cc092f"/>
+  <path d="M 38 27 C 33 27 26 31 26 37 C 26 42 30 45 35 46 L 35 59 L 41 59 L 41 46 C 46 45 50 42 50 37 C 50 31 43 27 38 27 Z" fill="#ffffff"/>
+  <text x="72" y="44" font-family="'Inter', sans-serif" font-weight="800" font-size="22" fill="#cc092f">Bradesco</text>
+  <text x="72" y="64" font-family="'Inter', sans-serif" font-weight="600" font-size="14" fill="#475569">Vida e Previdência</text>
+</svg>

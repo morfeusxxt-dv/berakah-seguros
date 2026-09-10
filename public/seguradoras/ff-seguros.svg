@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80">
+  <!-- Double F arrow mark in bright blue -->
+  <g fill="#0044cc">
+    <rect x="25" y="24" width="6" height="32" rx="1"/>
+    <rect x="31" y="24" width="16" height="5" rx="1"/>
+    <rect x="31" y="37" width="12" height="5" rx="1"/>
+    <!-- Second F forward arrows -->
+    <path d="M 52 24 L 62 38 L 52 52 L 48 52 L 57 38 L 48 24 Z"/>
+    <path d="M 60 24 L 70 38 L 60 52 L 56 52 L 65 38 L 56 24 Z"/>
+  </g>
+  <text x="80" y="48" font-family="'Montserrat', sans-serif" font-weight="800" font-size="24" fill="#0044cc">Seguros</text>
+  <text x="80" y="62" font-family="'Inter', sans-serif" font-weight="600" font-size="8" fill="#475569" letter-spacing="0.5">A FAIRFAX Company</text>
+</svg>

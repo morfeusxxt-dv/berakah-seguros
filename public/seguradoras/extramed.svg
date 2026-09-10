@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" width="240" height="100">
+  <!-- Green and blue folded layers -->
+  <path d="M 105 12 L 135 12 L 125 32 L 95 32 Z" fill="#38a169"/>
+  <path d="M 100 24 L 130 24 L 120 44 L 90 44 Z" fill="#3182ce"/>
+  <text x="120" y="66" text-anchor="middle" font-family="'Montserrat', 'Arial Black', sans-serif" font-weight="900" font-size="22" fill="#2d3748" letter-spacing="1">EXTRAMED</text>
+  <text x="120" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-weight="600" font-size="9" fill="#718096">Administradora de Benefícios</text>
+</svg>

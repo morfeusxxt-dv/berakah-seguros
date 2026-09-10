@@ -10,6 +10,8 @@ import {
 } from 'lucide-react'
 import { InsuranceSimulator } from '@/components/InsuranceSimulator'
 import { TestimonialsSection } from '@/components/TestimonialsSection'
+import { PartnersMarquee } from '@/components/PartnersMarquee'
+import { PartnersShowcase } from '@/components/PartnersShowcase'
 
 /* ── Catálogo de Seguros ──────────────────── */
 const services = [
@@ -106,7 +108,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── TRUST BAR (BARRA DE AUTORIDADE) ─────── */}
+      {/* ── TRUST BAR (BARRA DE AUTORIDADE COM MARQUEE) ─────── */}
       <section className="trust-bar" aria-label="Seguradoras parceiras">
         <div className="trust-bar-inner">
           <div className="trust-holding-pill">
@@ -116,18 +118,7 @@ export default function HomePage() {
 
           <div className="trust-insurers-wrap">
             <span className="trust-insurers-label">Cotação com as maiores seguradoras do país:</span>
-            <div className="trust-insurers-list">
-              {partnerInsurers.map((n) => (
-                <Image
-                  key={n}
-                  src={`/logos/logo_${String(n).padStart(2, '0')}.png`}
-                  alt={`Seguradora conveniada ${n}`}
-                  width={95}
-                  height={28}
-                  className="trust-insurer-item"
-                />
-              ))}
-            </div>
+            <PartnersMarquee />
           </div>
         </div>
       </section>
@@ -280,8 +271,8 @@ export default function HomePage() {
       <section className="why-section" id="sobre" aria-labelledby="why-heading">
         <div className="why-visual">
           <Image
-            src="/home-why-holding.jpg"
-            alt="Consultoria de seguros da Berakah"
+            src="/imagemrafaella.jpeg"
+            alt="Rafaella Pinheiro — Fundadora da Berakah Seguros"
             fill
             style={{ objectFit: 'cover' }}
           />
@@ -292,7 +283,7 @@ export default function HomePage() {
             Proteção real com quem<br /><span style={{ color: '#D99500' }}>está ao seu lado.</span>
           </h2>
           <p style={{ marginBottom: '32px' }}>
-            Fundada por <strong>Rafaella</strong> e integrada à solidez do <strong>Grupo Baruch</strong>, a Berakah Seguros une o poder de negociação junto às maiores seguradoras do país à dedicação exclusiva de quem acompanha cada sinistro do início ao fim, com total proximidade e sem letras miúdas.
+            Fundada por <strong>Rafaella Pinheiro</strong> e integrada à solidez do <strong>Grupo Baruch</strong>, a Berakah Seguros une o poder de negociação junto às maiores seguradoras do país à dedicação exclusiva de quem acompanha cada sinistro do início ao fim, com total proximidade e sem letras miúdas.
           </p>
           <div style={{ display: 'flex', gap: '14px', flexWrap: 'wrap' }}>
             <Link href="/sobre" className="btn btn-primary" id="why-sobre-btn">
@@ -369,6 +360,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ── SEGURADORAS PARCEIRAS (GRID COMPLETO INTERATIVO) ─ */}
+      <PartnersShowcase />
 
       {/* ── FAQ ──────────────────────────────── */}
       <section className="section faq-section" id="duvidas" aria-labelledby="faq-heading" style={{ background: 'var(--surface)', borderTop: '1px solid var(--border)' }}>
