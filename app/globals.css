@@ -345,19 +345,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   opacity: 0;
   pointer-events: none !important;
   z-index: -1;
-  animation: wa-ripple 2.4s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  animation: wa-ripple 3.8s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
 }
 @keyframes wa-ripple {
   0% {
-    transform: scale(0.92);
-    opacity: 0.85;
+    transform: scale(0.95);
+    opacity: 0.65;
   }
-  65% {
-    transform: scale(1.45);
+  30% {
+    transform: scale(1.35);
     opacity: 0;
   }
   100% {
-    transform: scale(1.45);
+    transform: scale(1.35);
     opacity: 0;
   }
 }
@@ -804,7 +804,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   justify-content: space-around;
   gap: 20px;
   min-width: 100%;
-  animation: scrollMarquee 38s linear infinite;
+  animation: scrollMarquee 75s linear infinite;
   will-change: transform;
 }
 .marquee-wrapper:hover .marquee-group {
@@ -1981,5 +1981,19 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-group {
+    animation: none !important;
+  }
+  .marquee-wrapper {
+    overflow-x: auto;
+  }
+  .whatsapp-pulse {
+    animation: none !important;
+    display: none !important;
+  }
 }

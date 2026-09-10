@@ -4,8 +4,8 @@ import Image from 'next/image'
 import { INSURERS } from '@/lib/insurers'
 
 export function PartnersMarquee() {
-  // Top featured insurers for the header trust bar
-  const featured = INSURERS.filter((i) => i.featured).slice(0, 16)
+  // Top insurers for the continuous trust marquee
+  const featured = INSURERS.slice(0, 28)
 
   return (
     <div className="marquee-wrapper" aria-label="Seguradoras conveniadas">
