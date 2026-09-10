@@ -326,10 +326,12 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   flex-shrink: 0;
   text-decoration: none;
   z-index: 2;
+  animation: wa-float 3.2s ease-in-out infinite;
 }
 .whatsapp-btn:hover {
-  transform: scale(1.08);
+  transform: scale(1.1);
   box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+  animation-play-state: paused;
 }
 .whatsapp-btn svg {
   width: 30px;
@@ -339,25 +341,33 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
 }
 .whatsapp-pulse {
   position: absolute;
-  inset: -4px;
+  inset: -3px;
   border-radius: 50%;
   border: 2px solid #25D366;
   opacity: 0;
   pointer-events: none !important;
   z-index: -1;
-  animation: wa-ripple 3.8s cubic-bezier(0.1, 0.8, 0.3, 1) infinite;
+  animation: wa-ripple 2.8s ease-out infinite;
+}
+@keyframes wa-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 @keyframes wa-ripple {
   0% {
     transform: scale(0.95);
-    opacity: 0.65;
+    opacity: 0.8;
   }
-  30% {
-    transform: scale(1.35);
+  55% {
+    transform: scale(1.4);
     opacity: 0;
   }
   100% {
-    transform: scale(1.35);
+    transform: scale(1.4);
     opacity: 0;
   }
 }
@@ -804,7 +814,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   justify-content: space-around;
   gap: 20px;
   min-width: 100%;
-  animation: scrollMarquee 75s linear infinite;
+  animation: scrollMarquee 50s linear infinite;
   will-change: transform;
 }
 .marquee-wrapper:hover .marquee-group {
@@ -1979,21 +1989,3 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   .timeline-item { gap: 20px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  .marquee-group {
-    animation: none !important;
-  }
-  .marquee-wrapper {
-    overflow-x: auto;
-  }
-  .whatsapp-pulse {
-    animation: none !important;
-    display: none !important;
-  }
-}
