@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { PhoneCall, X, ShieldAlert, CheckCircle, ExternalLink } from 'lucide-react'
 
@@ -19,14 +19,69 @@ const seguradorasTelefones = [
 
 export function EmergencyModal() {
   const [isOpen, setIsOpen] = useState(false)
+  const dialogRef = useRef<HTMLDivElement>(null)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+
+  /* Fecha com Escape */
+  const handleClose = useCallback(() => {
+    setIsOpen(false)
+    // Restaura o foco para o botão que abriu o modal
+    triggerRef.current?.focus()
+  }, [])
+
+  /* Focus trap + Escape */
+  useEffect(() => {
+    if (!isOpen) return
+
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    // Foca o primeiro elemento focável ao abrir
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    const focusableElements = Array.from(
+      dialog.querySelectorAll<HTMLElement>(focusableSelector)
+    )
+    focusableElements[0]?.focus()
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        handleClose()
+        return
+      }
+      if (e.key !== 'Tab') return
+
+      const first = focusableElements[0]
+      const last = focusableElements[focusableElements.length - 1]
+
+      if (e.shiftKey) {
+        // Shift+Tab: se estiver no primeiro, vai para o último
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last?.focus()
+        }
+      } else {
+        // Tab: se estiver no último, volta para o primeiro
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first?.focus()
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen, handleClose])
 
   return (
     <>
       {/* Botão Gatilho Fixo / Discreto ou no Menu */}
       <button
+        ref={triggerRef}
         type="button"
         onClick={() => setIsOpen(true)}
         aria-label="Abrir Telefones 24h de Seguradoras"
+        aria-haspopup="dialog"
         className="emergency-trigger-btn"
         style={{
           display: 'inline-flex',
@@ -65,9 +120,10 @@ export function EmergencyModal() {
             justifyContent: 'center',
             padding: '20px',
           }}
-          onClick={() => setIsOpen(false)}
+          onClick={handleClose}
         >
           <div
+            ref={dialogRef}
             style={{
               background: 'var(--white)',
               borderRadius: '20px',
@@ -85,7 +141,7 @@ export function EmergencyModal() {
             {/* Fechar */}
             <button
               type="button"
-              onClick={() => setIsOpen(false)}
+              onClick={handleClose}
               aria-label="Fechar modal"
               style={{
                 position: 'absolute',

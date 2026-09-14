@@ -1,13 +1,13 @@
 /* =========================================
    BERAKAH SEGUROS — DESIGN SYSTEM
+   Fontes gerenciadas via next/font (não bloqueante).
    ========================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Montserrat:wght@500;600;700;800;900&display=swap');
 
 /* ─── TOKENS (Branding Book Berakah Seguros) ──── */
 :root {
   --yellow:        #FFC700;
   --yellow-hover:  #E5B200;
+  --yellow-dark:   #D99500; /* amarelo escurecido — para texto sobre fundo claro */
   --yellow-soft:   rgba(255, 199, 0, 0.15);
   --yellow-pale:   #FFFDF0;
   --black:         #111111;
@@ -18,6 +18,7 @@
   --warm-bg:       #FAF9F6;
   --surface:       #F4F3EF;
   --surface-2:     #ECEAE4;
+  --surface-subtle: #F7F6F2; /* alias para uso em showcases */
   --border:        #E2DFD7;
   --border-dark:   #27272A;
   --muted:         #6B6866;
@@ -25,10 +26,11 @@
   --text:          #1A1917;
   --text-light:    #4A4845;
 
-  --ff-sans:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --ff-heading: 'Outfit', 'Montserrat', sans-serif;
-  --ff-serif:   'Outfit', sans-serif;
-  --ff-display: 'Outfit', sans-serif;
+  /* Fontes: variáveis injetadas via next/font no <html> com fallback seguro */
+  --ff-sans:    var(--font-plus-jakarta), -apple-system, BlinkMacSystemFont, sans-serif;
+  --ff-heading: var(--font-outfit), 'Outfit', sans-serif;
+  --ff-serif:   var(--font-outfit), 'Outfit', sans-serif;
+  --ff-display: var(--font-outfit), 'Outfit', sans-serif;
 
   --radius-sm:  4px;
   --radius:     8px;
@@ -43,6 +45,7 @@
   --nav-h:      76px;
   --section-px: clamp(24px, 7vw, 120px);
   --section-py: clamp(80px, 10vw, 140px);
+  --max-w:      1280px; /* largura máxima padrão de conteúdo */
 }
 
 /* ─── RESET ─────────────────────────────── */
@@ -414,6 +417,8 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
 .btn-dark:hover { background: var(--black-2); box-shadow: var(--shadow-lg); }
 .btn-outline { border: 1.5px solid var(--border); color: var(--text); background: transparent; }
 .btn-outline:hover { border-color: var(--black); background: var(--black); color: var(--white); }
+.btn-outline-dark { border: 1.5px solid var(--grafite); color: var(--text); background: transparent; }
+.btn-outline-dark:hover { border-color: var(--black); background: var(--black); color: var(--white); }
 .btn-outline-light { border: 1.5px solid rgba(255,255,255,0.3); color: var(--white); background: transparent; }
 .btn-outline-light:hover { border-color: var(--white); background: rgba(255,255,255,0.1); }
 .btn-sm { font-size: 12px; padding: 10px 18px; }
@@ -1916,7 +1921,7 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   color: var(--text);
   margin: 16px 0 20px;
 }
-.inner-hero-content h1 em { font-style: normal; color: #D99500; }
+.inner-hero-content h1 em { font-style: normal; color: var(--yellow-dark); }
 .inner-hero-content p { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 520px; }
 
 /* ─── UTILITIES ──────────────────────────── */
@@ -1933,6 +1938,64 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up { animation: fadeUp 0.6s ease forwards; }
+
+/* Scroll-triggered fade-in para seções */
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplica animação de entrada em todas as sections principais */
+.section,
+.home-hero,
+.trust-bar,
+.section-dual,
+.simulator-section,
+.why-section,
+.process-section,
+.testimonials-section,
+.partners-showcase-section,
+.faq-section,
+.final-cta {
+  animation: sectionReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
+}
+
+/* Quando a section entra no viewport via IntersectionObserver (classe .in-view) */
+.section.in-view,
+.trust-bar.in-view,
+.section-dual.in-view,
+.simulator-section.in-view,
+.why-section.in-view,
+.process-section.in-view,
+.testimonials-section.in-view,
+.partners-showcase-section.in-view,
+.faq-section.in-view,
+.final-cta.in-view {
+  animation-play-state: running;
+}
+
+/* Respeita preferência do usuário por menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .section,
+  .trust-bar,
+  .section-dual,
+  .simulator-section,
+  .why-section,
+  .process-section,
+  .testimonials-section,
+  .partners-showcase-section,
+  .faq-section,
+  .final-cta {
+    animation: none;
+  }
+}
 
 @keyframes spin {
   to { transform: rotate(360deg); }

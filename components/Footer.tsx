@@ -3,6 +3,9 @@ import Image from 'next/image'
 import { ArrowUpRight } from 'lucide-react'
 import { EmergencyModal } from '@/components/EmergencyModal'
 
+/* Centralizado para facilitar manutenção até migrar para .env */
+const WHATSAPP_NUMBER = '5511999999999'
+
 const footerLinks = {
   empresa: [
     { href: '/sobre',    label: 'Sobre Nós' },
@@ -11,16 +14,11 @@ const footerLinks = {
     { href: '/contato',  label: 'Contato' },
   ],
   solucoes: [
-    { href: '/solucoes', label: 'Seguro Auto' },
-    { href: '/solucoes', label: 'Seguro Residencial' },
-    { href: '/solucoes', label: 'Seguro de Vida' },
-    { href: '/solucoes', label: 'Seguro Empresarial' },
-    { href: '/solucoes', label: 'Seguro Viagem' },
-  ],
-  contato: [
-    { href: 'tel:+5511999999999',                  label: '(11) 99999-9999' },
-    { href: 'mailto:contato@berakahseguros.com.br', label: 'contato@berakahseguros.com.br' },
-    { href: '#',                                    label: 'Seg–Sex, 9h–18h' },
+    { href: '/solucoes#auto',        label: 'Seguro Auto' },
+    { href: '/solucoes#residencial', label: 'Seguro Residencial' },
+    { href: '/solucoes#vida',        label: 'Seguro de Vida' },
+    { href: '/solucoes#empresarial', label: 'Seguro Empresarial' },
+    { href: '/solucoes#viagem',      label: 'Seguro Viagem' },
   ],
 }
 
@@ -74,13 +72,17 @@ export function Footer() {
 
         <div className="footer-col">
           <h4>Contato</h4>
-          {footerLinks.contato.map(({ href, label }) => (
-            <a key={label} href={href}>{label}</a>
-          ))}
+          {/* Links funcionais */}
+          <a href="tel:+5511999999999">(11) 99999-9999</a>
+          <a href="mailto:contato@berakahseguros.com.br">contato@berakahseguros.com.br</a>
+          {/* Horário: não é link, apenas informação */}
+          <span style={{ display: 'block', fontSize: '14px', color: '#888', padding: '5px 0' }}>
+            Seg–Sex, 9h–18h
+          </span>
           <div style={{ marginTop: '16px', display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'flex-start' }}>
             <EmergencyModal />
             <Link
-              href="https://wa.me/5511999999999"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary btn-sm"
@@ -94,8 +96,10 @@ export function Footer() {
 
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Berakah Seguros. Todos os direitos reservados.</span>
+        {/* CNPJ e SUSEP: preencha com os dados reais da empresa */}
         <span style={{ color: '#444' }}>CNPJ: 00.000.000/0001-00 · SUSEP: 000000</span>
       </div>
     </footer>
   )
 }
+

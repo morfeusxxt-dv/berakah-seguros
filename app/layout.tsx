@@ -1,9 +1,27 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Outfit, Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { WhatsAppFAB } from '@/components/WhatsAppFAB'
+import { ScrollReveal } from '@/components/ScrollReveal'
+
+/* ── Fontes via next/font (não bloqueante de renderização) ── */
+const outfit = Outfit({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-outfit',
+  display: 'swap',
+})
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  variable: '--font-plus-jakarta',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
@@ -44,12 +62,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${outfit.variable} ${plusJakartaSans.variable}`}>
       <body>
         <Header />
         <main>{children}</main>
         <Footer />
         <WhatsAppFAB />
+        <ScrollReveal />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
