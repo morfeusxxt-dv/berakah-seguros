@@ -863,7 +863,6 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
 .partners-showcase-section {
   background: var(--surface-subtle);
   padding: clamp(60px, 8vw, 100px) var(--section-px);
-  border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   position: relative;
 }
@@ -1939,11 +1938,16 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
 }
 .animate-fade-up { animation: fadeUp 0.6s ease forwards; }
 
-/* Scroll-triggered fade-in para seções */
+/* Scroll-triggered reveal — abordagem segura:
+   Seções SÃO visíveis por padrão (sem opacity:0 global).
+   O JS adiciona .reveal-ready para marcar o elemento como candidato,
+   depois .reveal-visible para disparar a animação.
+   Se o JS for lento ou desabilitado, o conteúdo aparece normalmente. */
+
 @keyframes sectionReveal {
   from {
     opacity: 0;
-    transform: translateY(32px);
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -1951,48 +1955,25 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--ff-heading); font-weight: 700; line-
   }
 }
 
-/* Aplica animação de entrada em todas as sections principais */
-.section,
-.home-hero,
-.trust-bar,
-.section-dual,
-.simulator-section,
-.why-section,
-.process-section,
-.testimonials-section,
-.partners-showcase-section,
-.faq-section,
-.final-cta {
-  animation: sectionReveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  animation-play-state: paused;
+/* Estado inicial: invisível — SÓ aplicado quando JS marca .reveal-ready */
+.reveal-ready {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: none; /* animação feita via @keyframes, não transition */
 }
 
-/* Quando a section entra no viewport via IntersectionObserver (classe .in-view) */
-.section.in-view,
-.trust-bar.in-view,
-.section-dual.in-view,
-.simulator-section.in-view,
-.why-section.in-view,
-.process-section.in-view,
-.testimonials-section.in-view,
-.partners-showcase-section.in-view,
-.faq-section.in-view,
-.final-cta.in-view {
-  animation-play-state: running;
+/* Estado final: animação dispara quando JS marca .reveal-visible */
+.reveal-ready.reveal-visible {
+  animation: sectionReveal 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Respeita preferência do usuário por menos movimento */
 @media (prefers-reduced-motion: reduce) {
-  .section,
-  .trust-bar,
-  .section-dual,
-  .simulator-section,
-  .why-section,
-  .process-section,
-  .testimonials-section,
-  .partners-showcase-section,
-  .faq-section,
-  .final-cta {
+  .reveal-ready {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-ready.reveal-visible {
     animation: none;
   }
 }

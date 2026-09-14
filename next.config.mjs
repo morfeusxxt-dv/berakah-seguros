@@ -3,15 +3,14 @@ const nextConfig = {
   // TypeScript: build falha em erros (comportamento correto e seguro)
   // typescript.ignoreBuildErrors removido
 
-  // Otimização de imagens habilitada (pipeline WebP/AVIF do Next.js)
+  // Otimização de imagens: WebP/AVIF com cache agressivo para eliminar delay
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 86400, // 24h — após o primeiro carregamento, servido do cache
     dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Não usar contentDispositionType:'attachment' — impede preload pelo browser
   },
 
   // Headers HTTP de segurança

@@ -3,16 +3,18 @@
 import { useEffect } from 'react'
 
 /**
- * Observa todas as sections/elementos com classes de animação e
- * adiciona a classe `.in-view` quando entram no viewport,
- * disparando a animação de entrada definida no CSS.
+ * Abordagem segura de scroll-reveal:
+ * 1. JS adiciona .reveal-ready em cada seção elegível → oculta o elemento
+ * 2. IntersectionObserver detecta entrada no viewport
+ * 3. JS adiciona .reveal-visible → dispara a animação CSS
  *
- * Respeita `prefers-reduced-motion` automaticamente via CSS.
+ * Se o JS for lento ou desabilitado, as seções permanecem VISÍVEIS (default seguro).
+ * Respeita prefers-reduced-motion via CSS.
  */
 export function ScrollReveal() {
   useEffect(() => {
-    const selectors = [
-      '.section',
+    // Seleciona apenas seções abaixo do fold — nunca o hero principal
+    const selector = [
       '.trust-bar',
       '.section-dual',
       '.simulator-section',
@@ -22,31 +24,54 @@ export function ScrollReveal() {
       '.partners-showcase-section',
       '.faq-section',
       '.final-cta',
+      // Seções genéricas que estão abaixo do fold
+      'section.section',
     ].join(', ')
 
-    const elements = document.querySelectorAll(selectors)
-
+    const elements = document.querySelectorAll<HTMLElement>(selector)
     if (!elements.length) return
+
+    // Verifica se o usuário prefere menos movimento
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (prefersReduced) return // Não anima — conteúdo fica visível normalmente
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          const el = entry.target as HTMLElement
+
           if (entry.isIntersecting) {
-            entry.target.classList.add('in-view')
-            // Uma vez visível, para de observar para não re-animar
-            observer.unobserve(entry.target)
+            // Dispara a animação de entrada
+            el.classList.add('reveal-visible')
+            observer.unobserve(el) // Anima apenas uma vez
           }
         })
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -48px 0px',
+        threshold: 0.06,
+        rootMargin: '0px 0px -40px 0px',
       }
     )
 
-    elements.forEach((el) => observer.observe(el))
+    // Marca como ready APÓS o primeiro paint para não bloquear LCP
+    const raf = requestAnimationFrame(() => {
+      elements.forEach((el) => {
+        // Não oculta seções que já são visíveis no viewport
+        const rect = el.getBoundingClientRect()
+        const alreadyVisible = rect.top < window.innerHeight && rect.bottom > 0
 
-    return () => observer.disconnect()
+        if (!alreadyVisible) {
+          el.classList.add('reveal-ready')
+        }
+
+        observer.observe(el)
+      })
+    })
+
+    return () => {
+      cancelAnimationFrame(raf)
+      observer.disconnect()
+    }
   }, [])
 
   return null

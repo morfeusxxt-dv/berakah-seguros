@@ -12,6 +12,7 @@ import { InsuranceSimulator } from '@/components/InsuranceSimulator'
 import { TestimonialsSection } from '@/components/TestimonialsSection'
 import { PartnersMarquee } from '@/components/PartnersMarquee'
 import { PartnersShowcase } from '@/components/PartnersShowcase'
+import { SectionWave, SectionWaveGentle } from '@/components/SectionWave'
 
 /* ── Catálogo de Seguros ──────────────────── */
 const services = [
@@ -107,8 +108,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── DIVISOR ONDULADO HERO -> TRUST BAR ── */}
+      <SectionWave topColor="#111111" fillColor="#ffffff" height={56} />
+
       {/* ── TRUST BAR (BARRA DE AUTORIDADE COM MARQUEE) ─────── */}
-      <section className="trust-bar" aria-label="Seguradoras parceiras">
+      <section className="trust-bar" style={{ borderTop: 'none', borderBottom: 'none' }} aria-label="Seguradoras parceiras">
         <div className="trust-bar-inner">
           <div className="trust-holding-pill">
             <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--black)', display: 'inline-block' }} />
@@ -121,6 +125,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── DIVISOR ONDULADO TRUST BAR -> CONSCIENTIZAÇÃO ── */}
+      <SectionWaveGentle topColor="#ffffff" fillColor="#F4F3EF" height={46} flip />
 
       {/* ── SEÇÃO 2: A REALIDADE QUE NINGUÉM CONTA (CARDS BICOLORES) ── */}
       <section className="section-dual" id="conscientizacao" aria-labelledby="dual-heading">
@@ -273,6 +280,7 @@ export default function HomePage() {
             src="/imagemrafaella.jpeg"
             alt="Rafaella Pinheiro — Fundadora da Berakah Seguros"
             fill
+            sizes="(max-width: 900px) 100vw, 50vw"
             style={{ objectFit: 'cover' }}
           />
         </div>
@@ -321,6 +329,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── DIVISOR ONDULADO PROCESSO -> PROVA SOCIAL ── */}
+      <SectionWaveGentle topColor="#F4F3EF" fillColor="#FAF9F6" height={44} />
+
       {/* ── PROVA SOCIAL & DEPOIMENTOS DE SINISTRO ─ */}
       <TestimonialsSection />
 
@@ -359,6 +370,9 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
+      {/* ── DIVISOR ONDULADO BLOG -> SEGURADORAS PARCEIRAS ── */}
+      <SectionWaveGentle topColor="#FAF9F6" fillColor="#F7F6F2" height={40} flip />
 
       {/* ── SEGURADORAS PARCEIRAS (GRID COMPLETO INTERATIVO) ─ */}
       <PartnersShowcase />
@@ -399,8 +413,11 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── DIVISOR ONDULADO FAQ -> FINAL CTA ── */}
+      <SectionWave topColor="#F4F3EF" fillColor="#FFFDF8" height={50} />
+
       {/* ── FINAL CTA ────────────────────────── */}
-      <section className="final-cta" aria-labelledby="cta-heading">
+      <section className="final-cta" style={{ borderTop: 'none', borderBottom: 'none' }} aria-labelledby="cta-heading">
         <div className="final-cta-bg" aria-hidden="true" />
         <div className="final-cta-content">
           <span className="eyebrow">Pronto para proteger o que importa?</span>
@@ -426,6 +443,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── DIVISOR ONDULADO FINAL CTA -> FOOTER DARK ── */}
+      <SectionWave topColor="#FAF6EA" fillColor="#111111" height={56} flip />
     </>
   )
 }
