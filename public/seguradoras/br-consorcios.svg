@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 90" width="240" height="90">
+  <defs>
+    <linearGradient id="brGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0047BA"/>
+      <stop offset="100%" stop-color="#00A859"/>
+    </linearGradient>
+  </defs>
+  <rect x="18" y="18" width="46" height="54" rx="8" fill="url(#brGrad)" />
+  <text x="41" y="54" text-anchor="middle" font-family="'Inter', 'Montserrat', sans-serif" font-weight="900" font-size="28" fill="#FFFFFF" letter-spacing="1">BR</text>
+  <text x="76" y="47" font-family="'Inter', 'Montserrat', sans-serif" font-weight="800" font-size="22" fill="#0F172A" letter-spacing="0.5">CONSORCIOS</text>
+  <text x="76" y="65" font-family="'Inter', sans-serif" font-weight="600" font-size="10" fill="#00A859" letter-spacing="2">ADMINISTRADORA</text>
+</svg>

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:zip": "next build && node scripts/build-zip.js",
     "start": "next start"
   },
   "dependencies": {

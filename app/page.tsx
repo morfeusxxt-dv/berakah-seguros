@@ -6,24 +6,26 @@ import Link from 'next/link'
 import {
   ArrowUpRight, Plus, Check,
   Car, House, HeartPulse, BriefcaseBusiness, Plane,
-  Smartphone, Stethoscope, ShieldCheck,
+  Smartphone, Stethoscope, ShieldCheck, WalletCards,
 } from 'lucide-react'
 import { InsuranceSimulator } from '@/components/InsuranceSimulator'
 import { TestimonialsSection } from '@/components/TestimonialsSection'
 import { PartnersMarquee } from '@/components/PartnersMarquee'
 import { PartnersShowcase } from '@/components/PartnersShowcase'
 import { SectionWave, SectionWaveGentle } from '@/components/SectionWave'
+import { CONTACT_INFO } from '@/lib/contact'
 
-/* ── Catálogo de Seguros ──────────────────── */
+/* ── Catálogo de Soluções ──────────────────── */
 const services = [
-  { icon: Car,               slug: 'auto',         title: 'Seguro Auto',         desc: 'Proteção completa para veículos individuais ou frotas, com assistência 24h sem limite de km em todo o Brasil.', featured: false },
-  { icon: House,             slug: 'residencial',  title: 'Seguro Residencial',  desc: 'Seu lar e tudo o que você construiu protegidos contra incêndio, roubo, danos elétricos e desastres naturais.', featured: false },
-  { icon: HeartPulse,        slug: 'vida',         title: 'Seguro de Vida',      desc: 'Segurança financeira e liquidez imediata para sua família, além de coberturas completas com amparo em vida.', featured: true },
-  { icon: Stethoscope,       slug: 'saude',        title: 'Saúde & Odonto',      desc: 'Planos individuais e corporativos com acesso às melhores redes hospitalares, laboratórios e especialistas.', featured: false },
-  { icon: BriefcaseBusiness, slug: 'empresarial',  title: 'Seguro Empresarial',  desc: 'Proteção patrimonial completa para seu comércio, escritório ou indústria, incluindo lucros cessantes.', featured: false },
+  { icon: Car,               slug: 'auto',         title: 'Seguro Auto & Motos',    desc: 'Proteção completa para veículos individuais ou frotas, com assistência 24h sem limite de km em todo o Brasil.', featured: false },
+  { icon: Stethoscope,       slug: 'saude',        title: 'Planos de Saúde & Odonto', desc: 'Planos individuais, familiares e empresariais a partir de 1 vida (MEI com +6 meses ou PME). Cotação por idade, profissão e CEP.', featured: true },
+  { icon: WalletCards,       slug: 'consorcios',   title: 'Consórcios (Moto, Carro, Imóvel & Serviços)', desc: 'Aquisição planejada sem juros com as principais administradoras: BR Consórcio, Consórcio Porto e Yamaha Consórcio.', featured: false },
+  { icon: HeartPulse,        slug: 'vida',         title: 'Seguro de Vida & Sucessão', desc: 'Segurança financeira e liquidez imediata para sua família, além de coberturas completas com amparo em vida.', featured: false },
+  { icon: House,             slug: 'residencial',  title: 'Seguro Residencial',     desc: 'Seu lar e tudo o que você construiu protegidos contra incêndio, roubo, danos elétricos e desastres naturais.', featured: false },
+  { icon: BriefcaseBusiness, slug: 'empresarial',  title: 'Seguro Empresarial',     desc: 'Proteção patrimonial completa para seu comércio, escritório ou indústria, incluindo lucros cessantes.', featured: false },
   { icon: ShieldCheck,       slug: 'rc',           title: 'Responsabilidade Civil', desc: 'Blindagem jurídica e patrimonial para executivos (D&O), médicos, advogados, engenheiros e prestadores.', featured: false },
   { icon: Smartphone,        slug: 'portateis',    title: 'Equipamentos Portáteis', desc: 'Notebooks, smartphones e câmeras protegidos no Brasil e no exterior contra roubo, furto e danos acidentais.', featured: false },
-  { icon: Plane,             slug: 'viagem',       title: 'Seguro Viagem',       desc: 'Assistência médica hospitalar 24h em viagens nacionais e internacionais, extravio de bagagem e repatriação.', featured: false },
+  { icon: Plane,             slug: 'viagem',       title: 'Seguro Viagem',          desc: 'Assistência médica hospitalar 24h em viagens nacionais e internacionais, extravio de bagagem e repatriação.', featured: false },
 ]
 
 
@@ -34,23 +36,41 @@ const blogPosts = [
 ]
 
 const faqs = [
-  { q: 'Por que contratar meu seguro com a Berakah Seguros?', a: 'A Berakah Seguros combina atendimento consultivo humanizado com acesso direto às maiores seguradoras do país. Não empurramos apólices prontas: estudamos sua realidade para que você tenha a melhor cobertura pelo preço justo, com suporte total e ágil no momento do sinistro.' },
-  { q: 'A Berakah faz parte de algum grupo empresarial?',     a: 'Sim! Fazemos parte do Grupo Baruch, uma holding sólida que nos confere grande poder de negociação e respaldo institucional junto às seguradoras, garantindo que nossos segurados tenham máxima tranquilidade desde o primeiro contato.' },
-  { q: 'Quais tipos de seguros posso cotar com a Berakah?',    a: 'Operamos em todas as modalidades: Seguro Auto e Motos, Residencial, Vida e Sucessão, Planos de Saúde e Odonto, Empresarial, Frotas, Responsabilidade Civil (D&O / E&O), Equipamentos Portáteis, Seguro Viagem, Náutico e Cargas.' },
-  { q: 'Com quais seguradoras vocês trabalham?',               a: 'Trabalhamos em parceria com as líderes do mercado nacional, como Porto Seguro, Bradesco Seguros, Allianz, Tokio Marine, SulAmérica, Mapfre, Zurich, Liberty, entre outras.' },
-  { q: 'Como solicito uma cotação rápida?',                    a: 'É muito simples: você pode clicar no botão do WhatsApp e conversar instantaneamente com um consultor especialista, ou preencher o formulário no nosso site. Enviamos propostas comparativas em poucos minutos.' },
+  { q: 'Por que contratar meus seguros, plano de saúde e consórcios com a Berakah?', a: 'A Berakah Seguros combina atendimento consultivo humanizado com acesso direto às maiores seguradoras e administradoras do país. Não empurramos produtos prontos: estudamos sua realidade para que você tenha as melhores coberturas e menores taxas, com suporte total e ágil no momento do sinistro ou contemplação.' },
+  { q: 'A Berakah faz parte de algum grupo empresarial?',     a: 'Sim! Fazemos parte do Grupo Baruch, uma holding sólida que nos confere grande poder de negociação e respaldo institucional junto às seguradoras e administradoras parceiras, garantindo máxima tranquilidade e segurança aos nossos clientes.' },
+  { q: 'Quais tipos de consórcios e administradoras vocês operam?', a: 'Trabalhamos com consórcios para Moto, Carro, Imóvel e Serviços (reformas, festas, viagens, cirurgias e cursos), operando diretamente com as maiores administradoras do país: BR Consórcio, Consórcio Porto e Yamaha Consórcio.' },
+  { q: 'Quais informações são necessárias para cotar um Plano de Saúde?', a: 'Para Pessoa Física (Individual ou Familiar): precisamos da idade de cada vida, profissão e o CEP do endereço residencial. Para Empresas (PME / MEI): o MEI precisa de no mínimo 6 meses de CNPJ aberto; as demais empresas não exigem tempo mínimo de funcionamento. E o cálculo pode ser feito a partir de 1 única vida (o próprio titular do CNPJ) com valores até 35% menores!' },
+  { q: 'Com quais seguradoras e administradoras vocês trabalham?', a: 'Trabalhamos em parceria com as líderes do mercado: Porto Seguro, BR Consórcio, Yamaha Consórcio, Bradesco Seguros, SulAmérica Saúde, Amil, Allianz, Tokio Marine, Mapfre, Seguros Unimed, Omint, Zurich, Suhai, entre outras.' },
+  { q: 'Como solicito uma cotação rápida?',                    a: 'É muito simples: você pode clicar no botão do WhatsApp e conversar instantaneamente com um consultor especialista, ou preencher o simulador no nosso site. Enviamos propostas comparativas em poucos minutos.' },
 ]
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: f.a,
+    },
+  })),
+}
 
 export default function HomePage() {
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       {/* ── HERO FULL-BLEED CINEMÁTICA DE LADO A LADO ─────── */}
       <section className="home-hero" id="inicio" aria-label="Início">
         <div className="home-hero-bg-wrap">
           <Image
-            src="/hero-home.jpg"
+            src="/hero-home.webp"
             alt="Família protegida pela Berakah Seguros"
             fill
             priority
@@ -73,22 +93,30 @@ export default function HomePage() {
           </h1>
 
           <p className="hero-lead">
-            Comparamos apólices em mais de 10 seguradoras líderes para você ter a cobertura ideal pelo menor custo — com atendimento humano e apoio total em qualquer sinistro.
+            Comparamos apólices nas maiores seguradoras do país para você garantir o menor preço. E em caso de sinistro, nossa equipe assume toda a burocracia por você.
           </p>
 
           <div className="hero-actions-home">
-            <Link href="/contato" className="btn btn-primary btn-lg" id="hero-cta-cotacao">
+            <a href="#simulador" className="btn btn-primary btn-lg" id="hero-cta-cotacao">
               Simular Seguro Agora <ArrowUpRight size={18} />
-            </Link>
+            </a>
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Gostaria%20de%20solicitar%20uma%20cota%C3%A7%C3%A3o%20de%20seguro%20com%20a%20Berakah."
+              href={CONTACT_INFO.whatsapp.getLink('Olá! Gostaria de receber uma cotação comparativa nas principais seguradoras.')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline-hero"
               id="hero-whatsapp-btn"
             >
-              Falar com Especialista <ArrowUpRight size={16} />
+              Cotação no WhatsApp <ArrowUpRight size={16} />
             </a>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginTop: '14px', fontSize: '13px', color: 'rgba(255, 255, 255, 0.85)', fontWeight: 500 }}>
+            <span>⚡ Resposta em minutos</span>
+            <span style={{ opacity: 0.4 }}>•</span>
+            <span>🔒 100% gratuito e sem spam</span>
+            <span style={{ opacity: 0.4 }}>•</span>
+            <span>📊 As melhores seguradoras do Brasil</span>
           </div>
 
           <div className="hero-features-row">
@@ -268,7 +296,7 @@ export default function HomePage() {
 
         <div style={{ textAlign: 'center', marginTop: '48px' }}>
           <Link href="/solucoes" className="btn btn-outline" id="services-all-btn" style={{ borderColor: 'var(--border-dark)', color: 'var(--text)' }}>
-            Ver todas as 11 soluções de seguros <ArrowUpRight size={16} />
+            Ver todas as soluções &amp; modalidades <ArrowUpRight size={16} />
           </Link>
         </div>
       </section>
@@ -277,7 +305,7 @@ export default function HomePage() {
       <section className="why-section" id="sobre" aria-labelledby="why-heading">
         <div className="why-visual">
           <Image
-            src="/imagemrafaella.jpeg"
+            src="/rafaella.webp"
             alt="Rafaella Pinheiro — Fundadora da Berakah Seguros"
             fill
             sizes="(max-width: 900px) 100vw, 50vw"
@@ -428,17 +456,17 @@ export default function HomePage() {
             Fale com um consultor especialista da Berakah Seguros pelo WhatsApp ou solicite uma simulação personalizada pelo formulário.
           </p>
           <div className="final-cta-actions">
-            <Link href="/contato" className="btn btn-primary btn-lg" id="home-final-cta-btn">
-              Solicitar cotação <ArrowUpRight size={18} />
-            </Link>
+            <a href="#simulador" className="btn btn-primary btn-lg" id="home-final-cta-btn">
+              Simular Seguro Grátis <ArrowUpRight size={18} />
+            </a>
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o%20com%20a%20Berakah%20Seguros"
+              href={CONTACT_INFO.whatsapp.getLink('Olá, gostaria de receber uma cotação comparativa com a Berakah Seguros')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline-dark btn-lg"
               id="home-final-wa-btn"
             >
-              Falar no WhatsApp <ArrowUpRight size={18} />
+              Receber Cotação no WhatsApp <ArrowUpRight size={18} />
             </a>
           </div>
         </div>

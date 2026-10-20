@@ -1,0 +1,77 @@
+# ==============================================================================
+# BERAKAH SEGUROS — CONFIGURAÇÃO APACHE / LITESPEED (HOSTINGER)
+# ==============================================================================
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # 0. Permitir acesso direto e irrestrito à pasta _next (CSS, JS, Chunks)
+  RewriteRule ^_next/ - [L]
+
+  # 1. Forçar HTTPS em todas as requisições
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 2. Redirecionar /index.html para a raiz limpa
+  RewriteRule ^index\.html$ / [R=301,L]
+
+  # 3. Remover barra final redundante (opcional, ou manter diretório nativo)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # 4. Servir arquivos e pastas existentes diretamente
+  RewriteCond %{REQUEST_FILENAME} -f
+  RewriteRule ^ - [L]
+
+  # 5. Fallback para página 404 caso o recurso não exista
+  ErrorDocument 404 /404.html
+</IfModule>
+
+# ==============================================================================
+# COMPRESSÃO GZIP / DEFLATE (Acelera o carregamento na Hostinger)
+# ==============================================================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml font/truetype font/opentype
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ==============================================================================
+# CACHE DE NAVEGADOR (LITESPEED / APACHE EXPIRES)
+# ==============================================================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML: Sem cache agressivo para atualizações entrarem de imediato
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # CSS e JavaScript gerados pelo Next.js (já possuem hash único no nome)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+
+  # Imagens e Mídia
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Fontes
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/ttf "access plus 1 year"
+</IfModule>
+
+# ==============================================================================
+# CABEÇALHOS DE SEGURANÇA HTTP
+# ==============================================================================
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" env=HTTPS
+</IfModule>

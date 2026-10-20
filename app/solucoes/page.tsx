@@ -7,7 +7,9 @@ import {
   ArrowUpRight, Car, House, HeartPulse,
   BriefcaseBusiness, Plane, ShieldCheck, Smartphone,
   Stethoscope, Truck, Anchor, CheckCircle2, MessageSquare,
+  WalletCards, Coins, Building,
 } from 'lucide-react'
+import { CONTACT_INFO } from '@/lib/contact'
 
 type Category = 'todos' | 'voce' | 'empresa'
 
@@ -35,6 +37,36 @@ const solutions: Solution[] = [
     featured: true,
   },
   {
+    icon: Stethoscope,
+    title: 'Planos de Saúde & Odontológico (Individual & Familiar)',
+    slug: 'saude',
+    category: 'voce',
+    tag: 'Qualidade de Vida',
+    desc: 'Planos individuais, familiares e coletivos por adesão com acesso aos melhores hospitais, laboratórios e telemedicina 24h. Cotação personalizada com base na idade das vidas, profissão e CEP residencial.',
+    benefits: ['Opções em Plano Individual e Plano Familiar', 'Cotação precisa por idade das vidas, profissão e CEP residencial', 'Ampla rede credenciada nacional e regional com reembolso', 'Telemedicina 24h com médicos plantonistas', 'Planos odontológicos conjugados inclusos ou opcionais'],
+    featured: true,
+  },
+  {
+    icon: WalletCards,
+    title: 'Consórcio Imobiliário & Serviços',
+    slug: 'consorcio-imovel',
+    category: 'voce',
+    tag: 'Planejamento Financeiro',
+    desc: 'Conquiste sua casa, apartamento, terreno, reforma ou financie serviços (viagens, festas, estudos e cirurgias) sem juros com BR Consórcio e Consórcio Porto.',
+    benefits: ['Modalidades para Imóveis e Serviços especializados', 'Parceria oficial com BR Consórcio e Consórcio Porto', 'Zero juros e parcelas flexíveis sob medida para seu bolso', 'Uso do saldo do FGTS para lances ou amortização imobiliária', 'Contemplação por sorteio mensal e lances estratégicos'],
+    featured: true,
+  },
+  {
+    icon: Coins,
+    title: 'Consórcio de Motos, Carros & Pesados',
+    slug: 'consorcio-auto',
+    category: 'voce',
+    tag: 'Aquisição Inteligente',
+    desc: 'Adquira sua moto, carro novo, seminovo ou frota pesada sem pagar juros abusivos. Parcerias líderes com Yamaha Consórcio, Consórcio Porto e BR Consórcio.',
+    benefits: ['Consórcio de Moto, Carro e Veículos Pesados', 'Administradoras oficiais: Yamaha Consórcio, Consórcio Porto e BR Consórcio', 'Economia de até 60% comparado ao financiamento tradicional', 'Grupos exclusivos com alto índice de contemplações', 'Possibilidade de usar veículo usado como lance'],
+    featured: false,
+  },
+  {
     icon: House,
     title: 'Seguro Residencial',
     slug: 'residencial',
@@ -52,16 +84,6 @@ const solutions: Solution[] = [
     tag: 'Blindagem Familiar',
     desc: 'Segurança e liquidez imediata para seus dependentes, com coberturas em vida para diagnóstico de doenças graves e invalidez.',
     benefits: ['Indenização isenta de imposto de renda e inventário', 'Adiantamento em vida para diagnóstico de doenças graves', 'Diárias por incapacidade temporária (DIT)', 'Cobertura para invalidez total ou parcial por acidente', 'Assistência funeral familiar completa'],
-    featured: true,
-  },
-  {
-    icon: Stethoscope,
-    title: 'Saúde & Odontológico',
-    slug: 'saude',
-    category: 'voce',
-    tag: 'Qualidade de Vida',
-    desc: 'Planos de saúde individuais, familiares e coletivos por adesão com acesso aos hospitais, laboratórios e especialistas de referência.',
-    benefits: ['Ampla rede credenciada nacional', 'Reembolso ágil para consultas e procedimentos fora da rede', 'Programas de telemedicina 24h sem coparticipação', 'Cobertura obstétrica completa e exames preventivos', 'Planos odontológicos conjugados'],
     featured: false,
   },
   {
@@ -94,6 +116,16 @@ const solutions: Solution[] = [
     tag: 'Corporativo',
     desc: 'Blindagem completa para seu estabelecimento comercial, escritório, galpão ou indústria contra incêndio, roubo e danos.',
     benefits: ['Proteção de prédios, instalações, estoques e maquinário', 'Cobertura de lucros cessantes e despesas fixas contínuas', 'Responsabilidade civil de operações e produtos', 'Danos elétricos e quebra de máquinas de precisão', 'Serviços emergenciais para manutenção do imóvel'],
+    featured: true,
+  },
+  {
+    icon: Stethoscope,
+    title: 'Plano de Saúde Empresarial (MEI & PME)',
+    slug: 'saude-empresarial',
+    category: 'empresa',
+    tag: 'Benefícios Corporativos',
+    desc: 'Planos de saúde empresariais calculados a partir de 1 única vida (titular do CNPJ). MEI elegível a partir de 6 meses de abertura e demais empresas sem tempo mínimo de funcionamento.',
+    benefits: ['Calculado a partir de apenas 1 vida (titular do CNPJ)', 'MEI: contratação a partir de 6 meses de CNPJ aberto', 'Demais empresas (LTDA, S/A, Eireli): sem carência mínima de CNPJ', 'Redução de até 35% nos custos em relação à pessoa física', 'Cotação rápida por idade das vidas, profissão e CEP'],
     featured: true,
   },
   {
@@ -146,13 +178,16 @@ export default function SolucoesPage() {
     return item.category === filter
   })
 
+  const countVoce = solutions.filter(s => s.category === 'voce').length
+  const countEmpresa = solutions.filter(s => s.category === 'empresa').length
+
   return (
     <>
       {/* ── INNER HERO CINEMÁTICA COM IMAGEM DE FUNDO ── */}
       <section className="page-hero" aria-labelledby="solucoes-hero-heading">
         <Image
-          src="/hero-solucoes.jpg"
-          alt="Consultora da Berakah Seguros apresentando coberturas personalizadas"
+          src="/hero-solucoes.webp"
+          alt="Família e patrimônio protegidos pela Berakah Seguros apresentando coberturas personalizadas"
           fill
           className="hero-bg"
           priority
@@ -162,13 +197,13 @@ export default function SolucoesPage() {
         <div className="hero-gradient-bottom" aria-hidden="true" />
         <div className="hero-content">
           <span className="eyebrow">
-            Soluções &amp; Coberturas • Berakah Seguros
+            Soluções, Planos &amp; Consórcios • Berakah Seguros
           </span>
           <h1 id="solucoes-hero-heading">
-            Proteção sob medida para <span>tudo o que você conquistou.</span>
+            Proteção e planejamento sob medida para <span>tudo o que você conquistou.</span>
           </h1>
           <p className="hero-lead">
-            Do automóvel à sucessão familiar; da sua residência a frotas corporativas. Escolha a categoria e compare as melhores opções de cobertura com um consultor especialista.
+            Do automóvel à saúde familiar; de consórcios imobiliários a grandes frotas e riscos corporativos. Compare as melhores opções com nossos corretores especialistas.
           </p>
         </div>
       </section>
@@ -180,9 +215,9 @@ export default function SolucoesPage() {
           {/* Header & Tabs */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', gap: '24px', flexWrap: 'wrap', marginBottom: '44px', borderBottom: '1px solid var(--border)', paddingBottom: '28px' }}>
             <div>
-              <span className="eyebrow" style={{ color: '#D99500' }}>11 Modalidades Disponíveis</span>
+              <span className="eyebrow" style={{ color: '#D99500' }}>{solutions.length} Modalidades Disponíveis</span>
               <h2 id="solutions-list-heading" style={{ fontFamily: 'var(--ff-heading)', fontWeight: 800, fontSize: 'clamp(28px,3.5vw,46px)', letterSpacing: '-0.035em', marginTop: '10px', color: 'var(--text)' }}>
-                Encontre o seguro <span style={{ color: '#D99500' }}>ideal para o seu momento.</span>
+                Encontre a proteção e o consórcio <span style={{ color: '#D99500' }}>ideal para o seu momento.</span>
               </h2>
             </div>
 
@@ -222,7 +257,7 @@ export default function SolucoesPage() {
                   transition: 'all 0.2s ease',
                 }}
               >
-                Para Você &amp; Família (6)
+                Para Você &amp; Família ({countVoce})
               </button>
               <button
                 type="button"
@@ -240,7 +275,7 @@ export default function SolucoesPage() {
                   transition: 'all 0.2s ease',
                 }}
               >
-                Para Sua Empresa (5)
+                Para Sua Empresa ({countEmpresa})
               </button>
             </div>
           </div>
@@ -328,7 +363,7 @@ export default function SolucoesPage() {
                   {/* Actions */}
                   <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', paddingTop: '20px', borderTop: '1px solid var(--border)' }}>
                     <a
-                      href={`https://wa.me/5511999999999?text=${waText}`}
+                      href={CONTACT_INFO.whatsapp.getLink(waText)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn btn-primary"
@@ -394,7 +429,7 @@ export default function SolucoesPage() {
           </p>
           <div className="final-cta-actions">
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20um%20consultor%20da%20Berakah%20Seguros"
+              href={CONTACT_INFO.whatsapp.getLink('Olá, gostaria de falar com um consultor da Berakah Seguros')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary btn-lg"

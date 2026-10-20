@@ -1,10 +1,11 @@
 'use client'
 
-const WHATSAPP_NUMBER = '5511999999999'
+import { CONTACT_INFO } from '@/lib/contact'
+
 const WHATSAPP_MESSAGE = 'Olá! Vim pelo site da Berakah Seguros e gostaria de saber mais sobre as soluções disponíveis.'
 
 export function WhatsAppFAB() {
-  const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`
+  const href = CONTACT_INFO.whatsapp.getLink(WHATSAPP_MESSAGE)
 
   return (
     <div className="whatsapp-fab" role="complementary" aria-label="Contato via WhatsApp">

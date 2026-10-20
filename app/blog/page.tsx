@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, Clock, Calendar } from 'lucide-react'
+import { CONTACT_INFO } from '@/lib/contact'
 
 export const metadata: Metadata = {
   title: 'Blog | Berakah Seguros — Dicas e Educação Securitária',
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export const posts = [
   {
     slug: 'seguro-auto-guia-completo',
-    thumb: '/blog-auto.jpg',
+    thumb: '/blog-auto.webp',
     category: 'Auto & Frotas',
     date: '28 de Agosto de 2026',
     readTime: '7 min',
@@ -50,7 +51,7 @@ export const posts = [
   },
   {
     slug: 'seguro-de-vida-para-familia',
-    thumb: '/blog-vida.jpg',
+    thumb: '/blog-vida.webp',
     category: 'Vida & Sucessão',
     date: '15 de Julho de 2026',
     readTime: '6 min',
@@ -82,7 +83,7 @@ export const posts = [
   },
   {
     slug: 'seguro-empresarial-guia',
-    thumb: '/blog-empresa.jpg',
+    thumb: '/blog-empresa.webp',
     category: 'Empresarial & Negócios',
     date: '3 de Junho de 2026',
     readTime: '8 min',
@@ -238,7 +239,7 @@ export default function BlogPage() {
           </p>
           <div className="final-cta-actions">
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20an%C3%A1lise%20gratuita%20da%20minha%20ap%C3%B3lice%20com%20a%20Berakah"
+              href={CONTACT_INFO.whatsapp.getLink('Olá, gostaria de uma análise gratuita da minha apólice com a Berakah')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary btn-lg"

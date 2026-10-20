@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ArrowUpRight, ArrowLeft, Clock, Calendar, MessageSquare, ShieldCheck } from 'lucide-react'
+import { CONTACT_INFO } from '@/lib/contact'
 import { posts } from '../page'
 
 interface Props {
@@ -34,10 +35,42 @@ export default async function BlogArticlePage({ params }: Props) {
   if (!post) notFound()
 
   const related = posts.filter((p) => p.slug !== slug).slice(0, 2)
-  const waText = encodeURIComponent(`Olá, li o artigo "${post.title}" no blog da Berakah Seguros e gostaria de tirar dúvidas com um corretor.`)
+  const waText = encodeURIComponent(
+    `Olá! Li o artigo "${post.title}" no site da Berakah Seguros e gostaria de tirar algumas dúvidas sobre as coberturas.`
+  )
+
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    image: `https://berakahseguros.com.br${post.thumb}`,
+    author: {
+      '@type': 'Organization',
+      name: 'Berakah Seguros',
+      url: 'https://berakahseguros.com.br',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Berakah Seguros',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://berakahseguros.com.br/logos/logo_03.png',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://berakahseguros.com.br/blog/${post.slug}/`,
+    },
+  }
 
   return (
-    <article style={{ background: 'var(--warm-bg)', minHeight: '100vh', color: 'var(--text)' }}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <article style={{ background: 'var(--warm-bg)', minHeight: '100vh', color: 'var(--text)' }}>
       {/* Article Header Clean */}
       <div style={{ background: 'linear-gradient(180deg, #F5F3ED 0%, #FAF9F6 100%)', borderBottom: '1px solid var(--border)', padding: '52px 24px 44px' }}>
         <div style={{ maxWidth: '840px', margin: '0 auto' }}>
@@ -166,7 +199,7 @@ export default async function BlogArticlePage({ params }: Props) {
           </p>
           <div style={{ display: 'flex', gap: '14px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <a
-              href={`https://wa.me/5511999999999?text=${waText}`}
+              href={CONTACT_INFO.whatsapp.getLink(decodeURIComponent(waText))}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary btn-lg"
@@ -238,5 +271,6 @@ export default async function BlogArticlePage({ params }: Props) {
         </section>
       )}
     </article>
+    </>
   )
 }

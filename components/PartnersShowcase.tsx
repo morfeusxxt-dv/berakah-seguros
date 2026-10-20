@@ -2,16 +2,18 @@
 
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
-import { Search, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react'
+import { Search, ShieldCheck, ExternalLink, ChevronDown, ChevronUp, Sparkles, HeartPulse, WalletCards, Shield } from 'lucide-react'
 import { INSURERS, Insurer } from '@/lib/insurers'
+import { CONTACT_INFO } from '@/lib/contact'
 
 const CATEGORIES = [
   'Todas',
-  'Líder de Mercado',
-  'Multinacional',
   'Saúde & Benefícios',
+  'Consórcios & Crédito',
+  'Líder de Mercado',
   'Vida & Previdência',
   'Insurtech & Auto',
+  'Multinacional',
   'Corporativo & Garantia',
 ] as const
 
@@ -20,17 +22,18 @@ interface PartnersShowcaseProps {
   subtitle?: string
   initialCategory?: string
   showSearch?: boolean
-  limit?: number
+  initialLimit?: number
 }
 
 export function PartnersShowcase({
-  title = 'Parceiros Oficiais: As Maiores Seguradoras do Brasil',
-  subtitle = 'Nossa independência nos permite cotar e emitir apólices nas companhias mais sólidas do mundo, garantindo a melhor cobertura pelo menor preço.',
+  title = 'Parceiros Oficiais: As Maiores Seguradoras & Administradoras',
+  subtitle = 'Independência e solidez: cotamos e emitimos apólices e cartas de crédito nas companhias mais sólidas do país, garantindo as melhores condições e suporte total.',
   showSearch = true,
-  limit,
+  initialLimit = 8,
 }: PartnersShowcaseProps) {
   const [selectedCat, setSelectedCat] = useState<string>('Todas')
   const [search, setSearch] = useState('')
+  const [expanded, setExpanded] = useState(false)
 
   const filteredInsurers = useMemo(() => {
     return INSURERS.filter((item) => {
@@ -43,19 +46,39 @@ export function PartnersShowcase({
     })
   }, [selectedCat, search])
 
-  const displayList = limit ? filteredInsurers.slice(0, limit) : filteredInsurers
+  // If searching or category is specific and has few items, show all; otherwise respect collapsed state
+  const isFiltered = Boolean(search.trim()) || (selectedCat !== 'Todas' && filteredInsurers.length <= initialLimit)
+  const shouldLimit = !expanded && !isFiltered
+  const displayList = shouldLimit ? filteredInsurers.slice(0, initialLimit) : filteredInsurers
+  const remainingCount = filteredInsurers.length - initialLimit
 
   return (
-    <section className="partners-showcase-section" aria-label="Seguradoras Conveniadas">
+    <section className="partners-showcase-section" aria-label="Seguradoras e Administradoras Conveniadas">
       <div className="partners-showcase-container">
         
         {/* Header */}
         <div className="partners-showcase-header">
-          <span className="partners-badge">
-            <ShieldCheck size={14} /> +40 COMPANHIAS CONVENIADAS
-          </span>
+          <div className="partners-badge">
+            <ShieldCheck size={14} /> +40 COMPANHIAS &amp; ADMINISTRADORAS
+          </div>
           <h2 className="partners-title">{title}</h2>
           <p className="partners-subtitle">{subtitle}</p>
+        </div>
+
+        {/* Quick Segment Highlights */}
+        <div className="partners-highlight-row">
+          <div className="partners-highlight-pill">
+            <Shield size={14} color="#D99500" />
+            <span>Seguros Gerais &amp; Auto</span>
+          </div>
+          <div className="partners-highlight-pill">
+            <HeartPulse size={14} color="#D99500" />
+            <span>Planos de Saúde &amp; Odonto</span>
+          </div>
+          <div className="partners-highlight-pill">
+            <WalletCards size={14} color="#D99500" />
+            <span>Consórcios Imobiliário &amp; Auto</span>
+          </div>
         </div>
 
         {/* Controls: Search & Category Pills */}
@@ -67,7 +90,7 @@ export function PartnersShowcase({
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Buscar seguradora (ex: Porto, Bradesco, Allianz, Suhai)..."
+                placeholder="Buscar parceiro (ex: Porto, Bradesco, Amil, SulAmérica, Mapfre)..."
                 className="partners-search-input"
               />
               {search && (
@@ -88,7 +111,10 @@ export function PartnersShowcase({
               <button
                 key={cat}
                 type="button"
-                onClick={() => setSelectedCat(cat)}
+                onClick={() => {
+                  setSelectedCat(cat)
+                  setExpanded(false)
+                }}
                 className={`partners-cat-btn ${selectedCat === cat ? 'active' : ''}`}
               >
                 {cat}
@@ -98,7 +124,7 @@ export function PartnersShowcase({
           </div>
         </div>
 
-        {/* Grid of Partners */}
+        {/* Grid of Partners (Compact & Polished) */}
         <div className="partners-grid">
           {displayList.map((ins) => (
             <div key={ins.id} className="partner-card" title={ins.name}>
@@ -106,8 +132,8 @@ export function PartnersShowcase({
                 <Image
                   src={ins.logo}
                   alt={`Logo ${ins.name}`}
-                  width={140}
-                  height={50}
+                  width={130}
+                  height={44}
                   className="partner-card-logo"
                   onError={(e) => {
                     // Fallback to PNG if SVG fails to load
@@ -129,9 +155,31 @@ export function PartnersShowcase({
           ))}
         </div>
 
+        {/* Expand / Collapse Button (Keeps page height compact & balanced) */}
+        {!isFiltered && remainingCount > 0 && (
+          <div className="partners-expand-wrap">
+            <button
+              type="button"
+              onClick={() => setExpanded(!expanded)}
+              className="partners-expand-btn"
+              id="toggle-partners-expand"
+            >
+              {expanded ? (
+                <>
+                  <ChevronUp size={16} /> Recolher visualização
+                </>
+              ) : (
+                <>
+                  <ChevronDown size={16} /> Ver todas as {filteredInsurers.length} companhias parceiras (+{remainingCount})
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
         {displayList.length === 0 && (
           <div className="partners-empty">
-            <p>Nenhuma seguradora encontrada para &ldquo;{search}&rdquo;.</p>
+            <p>Nenhuma seguradora ou administradora encontrada para &ldquo;{search}&rdquo;.</p>
             <button
               type="button"
               onClick={() => {
@@ -141,7 +189,7 @@ export function PartnersShowcase({
               className="btn btn-primary"
               style={{ marginTop: 12 }}
             >
-              Ver todas as seguradoras
+              Ver todas as companhias
             </button>
           </div>
         )}
@@ -149,10 +197,10 @@ export function PartnersShowcase({
         {/* Footer Note */}
         <div className="partners-footer-note">
           <p>
-            💡 <strong>Precisa de cotação em alguma companhia específica?</strong> Nossa equipe tem acesso aos portais de emissão direta de todas as seguradoras acima.
+            💡 <strong>Precisa de cotação em consórcio, plano de saúde ou seguro específico?</strong> Nossa equipe tem acesso aos portais de emissão direta de todas as companhias parceiras.
           </p>
           <a
-            href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Gostaria%20de%20cotar%20meu%20seguro%20com%20as%20principais%20seguradoras."
+            href={CONTACT_INFO.whatsapp.getLink('Olá! Gostaria de cotar meu seguro / plano de saúde / consórcio com as principais companhias.')}
             target="_blank"
             rel="noopener noreferrer"
             className="partners-cta-link"
@@ -164,3 +212,4 @@ export function PartnersShowcase({
     </section>
   )
 }
+

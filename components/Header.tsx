@@ -69,8 +69,8 @@ export function Header() {
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <EmergencyModal />
-            <Link href="/contato" className="header-cta" id="header-cta-btn">
-              Fale com a gente <ArrowUpRight size={15} />
+            <Link href="/#simulador" className="header-cta" id="header-cta-btn">
+              Cotar Seguro <ArrowUpRight size={15} />
             </Link>
           </div>
 
@@ -121,8 +121,8 @@ export function Header() {
           </Link>
         ))}
 
-        <Link href="/contato" className="header-cta" style={{ marginTop: '24px', display: 'flex', justifyContent: 'center', padding: '16px' }}>
-          Fale com a gente <ArrowUpRight size={15} />
+        <Link href="/#simulador" className="header-cta" style={{ marginTop: '24px', display: 'flex', justifyContent: 'center', padding: '16px' }}>
+          Cotar Seguro <ArrowUpRight size={15} />
         </Link>
       </nav>
     </>

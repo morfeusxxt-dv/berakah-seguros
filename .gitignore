@@ -33,3 +33,7 @@ pnpm-debug.log*
 # OS files
 .DS_Store
 *.pem
+
+# Backups & archives
+hostinger_deploy.zip
+docs_backup/

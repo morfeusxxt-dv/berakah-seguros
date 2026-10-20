@@ -3,7 +3,7 @@ export interface Insurer {
   name: string
   logo: string // SVG primary
   png: string  // PNG fallback / raster
-  category: 'Líder de Mercado' | 'Multinacional' | 'Saúde & Benefícios' | 'Vida & Previdência' | 'Insurtech & Auto' | 'Corporativo & Garantia'
+  category: 'Líder de Mercado' | 'Multinacional' | 'Saúde & Benefícios' | 'Consórcios & Crédito' | 'Vida & Previdência' | 'Insurtech & Auto' | 'Corporativo & Garantia'
   featured: boolean
   description?: string
 }
@@ -12,21 +12,21 @@ export const INSURERS: Insurer[] = [
   // ── Destaques Principais (Top Tier)
   {
     id: 'porto-seguro',
-    name: 'Porto Seguro',
+    name: 'Porto Seguro & Consórcios',
     logo: '/seguradoras/porto-seguro.svg',
     png: '/seguradoras/porto-seguro.png',
     category: 'Líder de Mercado',
     featured: true,
-    description: 'Líder absoluta em Seguro Auto, Residencial e Patrimonial no Brasil.'
+    description: 'Líder absoluta em Seguro Auto, Residencial, Saúde e Consórcios Imobiliários/Veiculares.'
   },
   {
     id: 'bradesco-seguros',
-    name: 'Bradesco Seguros',
+    name: 'Bradesco Seguros & Consórcios',
     logo: '/seguradoras/bradesco-seguros.svg',
     png: '/seguradoras/bradesco-seguros.png',
     category: 'Líder de Mercado',
     featured: true,
-    description: 'Maior grupo segurador da América Latina em Saúde, Vida e Previdência.'
+    description: 'Maior grupo segurador da América Latina em Planos de Saúde, Consórcios, Vida e Previdência.'
   },
   {
     id: 'allianz',
@@ -35,7 +35,7 @@ export const INSURERS: Insurer[] = [
     png: '/seguradoras/allianz.png',
     category: 'Multinacional',
     featured: true,
-    description: 'Gigante alemã líder global em serviços financeiros e seguros corporativos.'
+    description: 'Gigante alemã líder global em serviços financeiros, auto e grandes riscos corporativos.'
   },
   {
     id: 'tokio-marine',
@@ -44,25 +44,52 @@ export const INSURERS: Insurer[] = [
     png: '/seguradoras/tokio-marine.png',
     category: 'Multinacional',
     featured: true,
-    description: 'Tradição e solidez japonesa com excelência em atendimento a sinistros.'
+    description: 'Tradição e solidez japonesa com excelência em atendimento a sinistros e frotas.'
   },
   {
     id: 'sulamerica',
-    name: 'SulAmérica',
+    name: 'SulAmérica Saúde & Odonto',
     logo: '/seguradoras/sulamerica.svg',
     png: '/seguradoras/sulamerica.png',
-    category: 'Líder de Mercado',
+    category: 'Saúde & Benefícios',
     featured: true,
-    description: 'Referência centenária em Saúde, Odonto, Vida e Previdência Privada.'
+    description: 'Referência centenária em Planos de Saúde Premium, Odonto, Vida e Previdência Privada.'
+  },
+  {
+    id: 'amil',
+    name: 'Amil Saúde',
+    logo: '/seguradoras/amil.svg',
+    png: '/seguradoras/amil.png',
+    category: 'Saúde & Benefícios',
+    featured: true,
+    description: 'Rede médica e hospitalar de ponta para empresas, famílias e planos individuais no Brasil.'
+  },
+  {
+    id: 'seguros-unimed',
+    name: 'Seguros Unimed',
+    logo: '/seguradoras/seguros-unimed.svg',
+    png: '/seguradoras/seguros-unimed.png',
+    category: 'Saúde & Benefícios',
+    featured: true,
+    description: 'Braço segurador do Sistema Unimed com excelência médica, planos de saúde e previdência.'
+  },
+  {
+    id: 'omint',
+    name: 'Omint Saúde & Odonto',
+    logo: '/seguradoras/omint.svg',
+    png: '/seguradoras/omint.png',
+    category: 'Saúde & Benefícios',
+    featured: true,
+    description: 'Padrão premium em medicina diagnóstica, saúde executiva e seguro viagem internacional.'
   },
   {
     id: 'mapfre',
-    name: 'Mapfre Seguros',
+    name: 'Mapfre Seguros & Consórcios',
     logo: '/seguradoras/mapfre.svg',
     png: '/seguradoras/mapfre.png',
-    category: 'Multinacional',
+    category: 'Consórcios & Crédito',
     featured: true,
-    description: 'Multinacional espanhola com presença global em seguros gerais e rurais.'
+    description: 'Multinacional espanhola com soluções integradas em consórcios, auto e patrimônio.'
   },
   {
     id: 'zurich',
@@ -71,7 +98,7 @@ export const INSURERS: Insurer[] = [
     png: '/seguradoras/zurich.png',
     category: 'Multinacional',
     featured: true,
-    description: 'Solidez e precisão suíça para proteção de pessoas e grandes patrimônios.'
+    description: 'Solidez e precisão suíça para proteção de pessoas, consórcios e grandes patrimônios.'
   },
   {
     id: 'hdi',
@@ -80,61 +107,7 @@ export const INSURERS: Insurer[] = [
     png: '/seguradoras/hdi.png',
     category: 'Multinacional',
     featured: true,
-    description: 'Grupo alemão com agilidade e inovação em coberturas automotivas.'
-  },
-  {
-    id: 'chubb',
-    name: 'Chubb Seguros',
-    logo: '/seguradoras/chubb.svg',
-    png: '/seguradoras/chubb.png',
-    category: 'Multinacional',
-    featured: true,
-    description: 'Maior seguradora de propriedade e responsabilidade civil de capital aberto do mundo.'
-  },
-  {
-    id: 'metlife',
-    name: 'MetLife',
-    logo: '/seguradoras/metlife.svg',
-    png: '/seguradoras/metlife.png',
-    category: 'Vida & Previdência',
-    featured: true,
-    description: 'Líder mundial em seguros de vida, planos odontológicos e benefícios corporativos.'
-  },
-  {
-    id: 'axa',
-    name: 'AXA Seguros',
-    logo: '/seguradoras/axa.svg',
-    png: '/seguradoras/axa.png',
-    category: 'Multinacional',
-    featured: true,
-    description: 'Uma das maiores seguradoras do mundo, especializada em linhas comerciais e pessoais.'
-  },
-  {
-    id: 'aig',
-    name: 'AIG Seguros',
-    logo: '/seguradoras/aig.svg',
-    png: '/seguradoras/aig.png',
-    category: 'Corporativo & Garantia',
-    featured: true,
-    description: 'Líder global em seguros de responsabilidade civil, D&O, linhas financeiras e frotas.'
-  },
-  {
-    id: 'icatu',
-    name: 'Icatu Seguros',
-    logo: '/seguradoras/icatu.svg',
-    png: '/seguradoras/icatu.png',
-    category: 'Vida & Previdência',
-    featured: true,
-    description: 'Maior seguradora 100% independente do Brasil em Vida, Previdência e Capitalização.'
-  },
-  {
-    id: 'prudential',
-    name: 'Prudential',
-    logo: '/seguradoras/prudential.svg',
-    png: '/seguradoras/prudential.png',
-    category: 'Vida & Previdência',
-    featured: true,
-    description: 'Especialista máxima mundial em planejamento financeiro e proteção familiar em vida.'
+    description: 'Grupo alemão com agilidade e inovação em coberturas automotivas e patrimoniais.'
   },
   {
     id: 'suhai',
@@ -146,31 +119,40 @@ export const INSURERS: Insurer[] = [
     description: 'Líder nacional em cobertura exclusiva de furto e roubo para carros, motos e caminhões.'
   },
   {
-    id: 'seguros-unimed',
-    name: 'Seguros Unimed',
-    logo: '/seguradoras/seguros-unimed.svg',
-    png: '/seguradoras/seguros-unimed.png',
-    category: 'Saúde & Benefícios',
+    id: 'metlife',
+    name: 'MetLife Benefícios & Vida',
+    logo: '/seguradoras/metlife.svg',
+    png: '/seguradoras/metlife.png',
+    category: 'Vida & Previdência',
     featured: true,
-    description: 'Braço segurador do Sistema Unimed com excelência médica e previdenciária.'
+    description: 'Líder mundial em seguros de vida, planos odontológicos e benefícios corporativos.'
   },
   {
-    id: 'amil',
-    name: 'Amil Saúde',
-    logo: '/seguradoras/amil.svg',
-    png: '/seguradoras/amil.png',
-    category: 'Saúde & Benefícios',
+    id: 'chubb',
+    name: 'Chubb Seguros',
+    logo: '/seguradoras/chubb.svg',
+    png: '/seguradoras/chubb.png',
+    category: 'Multinacional',
     featured: true,
-    description: 'Rede hospitalar e médica de ponta para empresas e famílias em todo o Brasil.'
+    description: 'Maior seguradora de propriedade e responsabilidade civil de capital aberto do mundo.'
   },
   {
-    id: 'omint',
-    name: 'Omint Saúde',
-    logo: '/seguradoras/omint.svg',
-    png: '/seguradoras/omint.png',
-    category: 'Saúde & Benefícios',
+    id: 'prudential',
+    name: 'Prudential do Brasil',
+    logo: '/seguradoras/prudential.svg',
+    png: '/seguradoras/prudential.png',
+    category: 'Vida & Previdência',
     featured: true,
-    description: 'Padrão premium em medicina diagnóstica, saúde executiva e seguro viagem internacional.'
+    description: 'Especialista máxima mundial em planejamento financeiro e proteção familiar em vida.'
+  },
+  {
+    id: 'icatu',
+    name: 'Icatu Seguros',
+    logo: '/seguradoras/icatu.svg',
+    png: '/seguradoras/icatu.png',
+    category: 'Vida & Previdência',
+    featured: true,
+    description: 'Maior seguradora independente do Brasil em Vida, Previdência e Capitalização.'
   },
   {
     id: 'yelum',
@@ -207,6 +189,24 @@ export const INSURERS: Insurer[] = [
     category: 'Vida & Previdência',
     featured: true,
     description: 'Mongeral Aegon: quase dois séculos contínuos de proteção à vida e futuro no país.'
+  },
+  {
+    id: 'axa',
+    name: 'AXA Seguros',
+    logo: '/seguradoras/axa.svg',
+    png: '/seguradoras/axa.png',
+    category: 'Multinacional',
+    featured: true,
+    description: 'Uma das maiores seguradoras do mundo, especializada em linhas comerciais e pessoais.'
+  },
+  {
+    id: 'aig',
+    name: 'AIG Seguros',
+    logo: '/seguradoras/aig.svg',
+    png: '/seguradoras/aig.png',
+    category: 'Corporativo & Garantia',
+    featured: true,
+    description: 'Líder global em seguros de responsabilidade civil, D&O, linhas financeiras e frotas.'
   },
   {
     id: 'akad',
@@ -317,22 +317,49 @@ export const INSURERS: Insurer[] = [
     description: 'Braço segurador da W. R. Berkley Corporation com expertise em Garantia e RC.'
   },
   {
+    id: 'consorcio-porto',
+    name: 'Consórcio Porto',
+    logo: '/seguradoras/porto-seguro.svg',
+    png: '/seguradoras/porto-seguro.png',
+    category: 'Consórcios & Crédito',
+    featured: true,
+    description: 'Consórcio Porto Seguro: planos para imóveis, automóveis, motos e serviços com tradição e solidez.'
+  },
+  {
+    id: 'br-consorcios',
+    name: 'BR Consórcios',
+    logo: '/seguradoras/br-consorcios.svg',
+    png: '/seguradoras/br-consorcios.svg',
+    category: 'Consórcios & Crédito',
+    featured: true,
+    description: 'Uma das maiores administradoras independentes do Brasil para veículos, imóveis e serviços.'
+  },
+  {
+    id: 'yamaha-consorcio',
+    name: 'Yamaha Consórcio',
+    logo: '/seguradoras/yamaha-consorcio.svg',
+    png: '/seguradoras/yamaha-consorcio.svg',
+    category: 'Consórcios & Crédito',
+    featured: true,
+    description: 'Líder em consórcios de motos e veículos Yamaha, com planos flexíveis e altas taxas de contemplação.'
+  },
+  {
     id: 'cnp',
-    name: 'CNP Seguros',
+    name: 'CNP Seguros & Consórcios',
     logo: '/seguradoras/cnp.svg',
     png: '/seguradoras/cnp.png',
-    category: 'Multinacional',
+    category: 'Consórcios & Crédito',
     featured: false,
-    description: 'Líder francesa de seguros pessoais e proteção financeira há mais de 170 anos.'
+    description: 'Líder francesa de consórcios, proteção financeira e previdência há mais de 170 anos.'
   },
   {
     id: 'extramed',
-    name: 'Extramed',
+    name: 'Extramed Saúde',
     logo: '/seguradoras/extramed.svg',
     png: '/seguradoras/extramed.png',
     category: 'Saúde & Benefícios',
     featured: false,
-    description: 'Administradora de benefícios corporativos e planos coletivos de saúde.'
+    description: 'Administradora de benefícios corporativos e planos coletivos de saúde de alta adesão.'
   },
   {
     id: 'ez-seguros',

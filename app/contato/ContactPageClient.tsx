@@ -4,12 +4,13 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { ArrowUpRight, Phone, Mail, MapPin, Clock, CheckCircle2, MessageSquare, ShieldAlert } from 'lucide-react'
 import { EmergencyModal } from '@/components/EmergencyModal'
+import { CONTACT_INFO } from '@/lib/contact'
 
 const contactInfo = [
-  { icon: Phone,   label: 'Telefone Direto', value: '(11) 99999-9999',               href: 'tel:+5511999999999' },
-  { icon: Mail,    label: 'E-mail Comercial', value: 'contato@berakahseguros.com.br', href: 'mailto:contato@berakahseguros.com.br' },
+  { icon: Phone,   label: 'Telefone Direto', value: CONTACT_INFO.phone.display,        href: CONTACT_INFO.phone.tel },
+  { icon: Mail,    label: 'E-mail Comercial', value: CONTACT_INFO.email,                href: `mailto:${CONTACT_INFO.email}` },
   { icon: MapPin,  label: 'Endereço Corporativo', value: 'São Paulo, SP — Brasil',    href: '#' },
-  { icon: Clock,   label: 'Horário de Atendimento', value: 'Seg–Sex: 9h às 18h (Plantão 24h Sinistro)', href: '#' },
+  { icon: Clock,   label: 'Horário de Atendimento', value: `${CONTACT_INFO.schedule} (Plantão 24h Sinistro)`, href: '#' },
 ]
 
 export default function ContactPageClient() {
@@ -34,7 +35,7 @@ export default function ContactPageClient() {
       {/* ── INNER HERO CINEMÁTICA COM IMAGEM DE FUNDO ──── */}
       <section className="page-hero" aria-labelledby="contato-hero-heading">
         <Image
-          src="/hero-solucoes.jpg"
+          src="/hero-solucoes.webp"
           alt="Atendimento consultivo e personalizado da Berakah Seguros"
           fill
           className="hero-bg"
@@ -140,7 +141,7 @@ export default function ContactPageClient() {
                 Inicie uma conversa direta para receber cotações rápidas e comparativos das seguradoras.
               </p>
               <a
-                href="https://wa.me/5511999999999?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Berakah%20Seguros%20e%20gostaria%20de%20uma%20cota%C3%A7%C3%A3o."
+                href={CONTACT_INFO.whatsapp.getLink('Olá! Vim pelo site da Berakah Seguros e gostaria de uma cotação.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
@@ -176,11 +177,11 @@ export default function ContactPageClient() {
 
                 {/* Instant WhatsApp Accelerator Button */}
                 <a
-                  href={`https://wa.me/5511999999999?text=${encodeURIComponent(`Olá! Enviei uma solicitação pelo formulário do site da Berakah Seguros:
+                  href={CONTACT_INFO.whatsapp.getLink(`Olá! Enviei uma solicitação pelo formulário do site da Berakah Seguros:
 • Nome: ${nome || 'Cliente'}
 • Seguro de Interesse: ${tipoSeguro}
 • Contato: ${whatsapp || email || 'Informado no site'}
-Gostaria de agilizar o envio da proposta por aqui!`)}`}
+Gostaria de agilizar o envio da proposta por aqui!`)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary btn-lg"
@@ -256,7 +257,7 @@ Gostaria de agilizar o envio da proposta por aqui!`)}`}
                         required
                         value={whatsapp}
                         onChange={e => setWhatsapp(e.target.value)}
-                        placeholder="(11) 99999-9999"
+                        placeholder="(98) 99999-9999"
                         style={{
                           width: '100%',
                           padding: '14px 16px',
@@ -298,7 +299,7 @@ Gostaria de agilizar o envio da proposta por aqui!`)}`}
                     {/* Tipo de Seguro */}
                     <div>
                       <label htmlFor="contato-tipo" style={{ display: 'block', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--ff-heading)', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text)', marginBottom: '8px' }}>
-                        Qual seguro você tem interesse? *
+                        Qual solução ou consórcio você tem interesse? *
                       </label>
                       <select
                         id="contato-tipo"
@@ -315,30 +316,57 @@ Gostaria de agilizar o envio da proposta por aqui!`)}`}
                           outline: 'none',
                         }}
                       >
-                        <option value="auto">Seguro Auto / Moto / Frota</option>
+                        <option value="auto">Seguro Auto / Moto / Frotas</option>
+                        <option value="saude-individual">Plano de Saúde (Individual ou Familiar)</option>
+                        <option value="saude-empresarial">Plano de Saúde Empresarial (MEI a partir de 6m / PME a partir de 1 vida)</option>
+                        <option value="consorcio-veicular">Consórcio de Moto ou Carro (Yamaha / Porto / BR Consórcios)</option>
+                        <option value="consorcio-imovel-servicos">Consórcio Imobiliário &amp; Serviços (Porto / BR Consórcios)</option>
+                        <option value="vida">Seguro de Vida &amp; Sucessão Patrimonial</option>
                         <option value="residencial">Seguro Residencial</option>
-                        <option value="vida">Seguro de Vida &amp; Sucessão</option>
-                        <option value="saude">Plano de Saúde &amp; Odonto</option>
                         <option value="empresarial">Seguro Empresarial / Patrimonial</option>
                         <option value="rc">Responsabilidade Civil (D&amp;O / E&amp;O)</option>
-                        <option value="portateis">Equipamentos Portáteis (Smartphone, Notebook)</option>
-                        <option value="viagem">Seguro Viagem</option>
+                        <option value="portateis">Equipamentos Portáteis (Notebook / Smartphone)</option>
+                        <option value="viagem">Seguro Viagem Nacional &amp; Internacional</option>
                         <option value="nautico">Seguro Náutico ou Aeronáutico</option>
-                        <option value="outro">Outro tipo de cobertura</option>
+                        <option value="outro">Outra modalidade de proteção</option>
                       </select>
+
+                      {/* Informações específicas dinâmicas */}
+                      {tipoSeguro.includes('saude') && (
+                        <div style={{ marginTop: '10px', padding: '12px 14px', background: 'rgba(217, 149, 0, 0.08)', borderRadius: '8px', border: '1px solid rgba(217, 149, 0, 0.2)', fontSize: '12px', color: 'var(--text)', lineHeight: 1.5 }}>
+                          💡 <strong>Dados para cotação do Plano de Saúde:</strong> Informe no campo de detalhes a <strong>idade de cada vida</strong>, <strong>profissão</strong> e o <strong>CEP do endereço residencial</strong>.
+                          {tipoSeguro === 'saude-empresarial' && (
+                            <span style={{ display: 'block', marginTop: '4px' }}>
+                              • <strong>Empresas:</strong> MEI requer mínimo de 6 meses de CNPJ aberto; demais empresas sem carência mínima. Pode ser cotado a partir de <strong>uma única vida</strong> (titular do CNPJ)!
+                            </span>
+                          )}
+                        </div>
+                      )}
+
+                      {tipoSeguro.includes('consorcio') && (
+                        <div style={{ marginTop: '10px', padding: '12px 14px', background: 'rgba(217, 149, 0, 0.08)', borderRadius: '8px', border: '1px solid rgba(217, 149, 0, 0.2)', fontSize: '12px', color: 'var(--text)', lineHeight: 1.5 }}>
+                          💡 <strong>Administradoras Parceiras:</strong> Trabalhamos com <strong>BR Consórcio</strong>, <strong>Consórcio Porto</strong> e <strong>Yamaha Consórcio</strong> em produtos de <strong>Moto, Carro, Imóvel e Serviços</strong>.
+                        </div>
+                      )}
                     </div>
 
                     {/* Mensagem */}
                     <div>
                       <label htmlFor="contato-msg" style={{ display: 'block', fontSize: '12px', fontWeight: 700, fontFamily: 'var(--ff-heading)', textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--text)', marginBottom: '8px' }}>
-                        Observações ou detalhes do bem (opcional)
+                        {tipoSeguro.includes('saude') ? 'Detalhes das Vidas (Idade, Profissão e CEP) *' : 'Observações ou detalhes do bem (opcional)'}
                       </label>
                       <textarea
                         id="contato-msg"
                         rows={3}
                         value={msg}
                         onChange={e => setMsg(e.target.value)}
-                        placeholder="Ex: Modelo/ano do veículo, CEP de circulação, ou necessidade de carro reserva..."
+                        placeholder={
+                          tipoSeguro.includes('saude')
+                            ? 'Ex: Idade: 34 anos / Profissão: Engenheiro / CEP Residencial: 65000-000 / Empresa: MEI há 8 meses'
+                            : tipoSeguro.includes('consorcio')
+                            ? 'Ex: Consórcio para Moto Yamaha ou Imóvel de R$ 300 mil, parcela desejada em torno de R$ 1.500...'
+                            : 'Ex: Modelo/ano do veículo, CEP de circulação, ou necessidade de carro reserva...'
+                        }
                         style={{
                           width: '100%',
                           padding: '14px 16px',

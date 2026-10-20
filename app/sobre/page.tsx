@@ -3,6 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowUpRight, Shield, Award, CheckCircle2, Building2, Users } from 'lucide-react'
 import { PartnersShowcase } from '@/components/PartnersShowcase'
+import { CONTACT_INFO } from '@/lib/contact'
 
 export const metadata: Metadata = {
   title: 'Sobre Nós | Berakah Seguros — Grupo Baruch',
@@ -24,7 +25,7 @@ export default function SobrePage() {
       {/* ── INNER HERO CINEMÁTICA COM IMAGEM DE FUNDO ── */}
       <section className="page-hero" aria-labelledby="sobre-hero-heading">
         <Image
-          src="/hero-sobre.jpg"
+          src="/hero-sobre.webp"
           alt="Diretoria executiva e consultores da Berakah Seguros — Grupo Baruch"
           fill
           className="hero-bg"
@@ -70,7 +71,7 @@ export default function SobrePage() {
 
           <div className="mission-visual" style={{ position: 'relative' }}>
             <Image
-              src="/imagemrafaella.jpeg"
+              src="/rafaella.webp"
               alt="Rafaella Pinheiro — Fundadora e Diretora da Berakah Seguros"
               width={600}
               height={450}
@@ -180,7 +181,7 @@ export default function SobrePage() {
               Solicitar cotação personalizada <ArrowUpRight size={18} />
             </Link>
             <a
-              href="https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20com%20a%20equipe%20da%20Berakah%20Seguros"
+              href={CONTACT_INFO.whatsapp.getLink('Olá, gostaria de conversar com a equipe da Berakah Seguros')}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline-dark btn-lg"

@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import Image from 'next/image'
 import { PhoneCall, X, ShieldAlert, CheckCircle, ExternalLink } from 'lucide-react'
+import { CONTACT_INFO } from '@/lib/contact'
 
 const seguradorasTelefones = [
   { nome: 'Porto Seguro',       fone: '0800 727 0800', desc: 'Guincho, colisão, chaveiro e residencial', logo: '/seguradoras/porto-seguro.svg' },
@@ -257,7 +258,7 @@ export function EmergencyModal() {
                 Precisa do corretor Berakah no suporte?
               </span>
               <a
-                href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Sofri%20um%20sinistro%20e%20preciso%20de%20apoio%20da%20Berakah%20Seguros."
+                href={CONTACT_INFO.whatsapp.getLink('Olá! Sofri um sinistro e preciso de apoio da Berakah Seguros.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-primary"
