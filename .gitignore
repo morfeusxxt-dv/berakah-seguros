@@ -37,3 +37,4 @@ pnpm-debug.log*
 # Backups & archives
 hostinger_deploy.zip
 docs_backup/
+.vercel
